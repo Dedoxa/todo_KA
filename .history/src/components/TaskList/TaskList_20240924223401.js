@@ -1,0 +1,61 @@
+import React from "react";
+import PropTypes from "prop-types";
+import Task from "../Task/Task";
+
+import "./TaskList.css";
+
+export default class TaskList extends React.Component {
+  static defaultProps = {
+    data: [
+      {
+        descriptionText: "TaskList.defaultTask",
+        dateOfCreation: "TaskList.defaultDate",
+        edit: false,
+        done: false,
+        hidden: false,
+        id: -1,
+      },
+    ],
+    onDeleted: () => {
+      alert("TaskList.defaultFunction");
+    },
+    onToggleDone: () => {
+      alert("TaskList.defaultFunction");
+    },
+    onEdit: () => {
+      alert("TaskList.defaultFunction");
+    },
+    onRewrite: () => {
+      alert("TaskList.defaultFunction");
+    },
+  };
+
+  static propTypes = {
+    data: PropTypes.arrayOf(PropTypes.object).isRequired,
+    onDeleted: PropTypes.func,
+    onToggleDone: PropTypes.func,
+    onEdit: PropTypes.func,
+    onRewrite: PropTypes.func,
+  }
+
+  render() {
+    const { data, onDeleted, onToggleDone, onEdit, onRewrite } = this.props;
+
+    const tasks = data.map((item) => {
+      const { id, ...itemProps } = item;
+
+      return (
+        <Task
+          {...itemProps}
+          id={id}
+          onDeleted={() => onDeleted(id)}
+          onToggleDone={() => onToggleDone(id)}
+          onEdit={() => onEdit(id)}
+          onRewrite={onRewrite}
+        />
+      );
+    });
+
+    return <ul className="todo-list"> {tasks} </ul>;
+  }
+}
