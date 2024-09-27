@@ -1,52 +1,44 @@
-import React from "react";
+import React from 'react'
 
-import "./Task.css";
+import './Task.css'
 
 export default class Task extends React.Component {
   static defaultProps = {
     id: -1,
-    descriptionText: "defaultText",
-    createdText: "defaultText",
+    descriptionText: 'defaultText',
+    createdText: 'defaultText',
     onDeleted: () => {
-      alert("Task.defaultFunction");
+      alert('Task.defaultFunction')
     },
     done: false,
     hidden: false,
     onToggleDone: () => {
-      alert("Task.defaultFunction");
+      alert('Task.defaultFunction')
     },
   };
 
   static propTypes = {
     onDeleted: (props, propName, componentName) => {
-      const value = props[propName];
+      const value = props[propName]
       console.log(typeof value)
-      if (typeof value === "function" && !isNaN(value)) {
-        return null;
+      if (typeof value === 'function' && !isNaN(value)) {
+        return null
       }
 
-      return new TypeError(`${componentName}.${propName} must be a function.`);
+      return new TypeError(`${componentName}.${propName} must be a function.`)
     },
   };
 
   render() {
-    const {
-      id,
-      descriptionText,
-      createdText,
-      onDeleted,
-      done,
-      hidden,
-      onToggleDone,
-    } = this.props;
+    const { id, descriptionText, createdText, onDeleted, done, hidden, onToggleDone } = this.props
 
-    let classNames = "";
+    let classNames = ''
     if (done) {
-      classNames += " completed";
+      classNames += ' completed'
     }
 
     if (hidden) {
-      classNames += " hidden";
+      classNames += ' hidden'
     }
 
     return (
@@ -63,6 +55,6 @@ export default class Task extends React.Component {
           <button className="icon icon-destroy" onClick={onDeleted}></button>
         </div>
       </li>
-    );
+    )
   }
 }

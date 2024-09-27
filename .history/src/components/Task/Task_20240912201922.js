@@ -1,22 +1,14 @@
-import React from "react";
+import React from 'react'
 
-import "./Task.css";
+import './Task.css'
 
 export default class Task extends React.Component {
-
   render() {
+    const { descriptionText, createdText, onDeleted, done, onToggleDone } = this.props
 
-    const {
-      descriptionText,
-      createdText,
-      onDeleted,
-      done,
-      onToggleDone,
-    } = this.props;
-    
-    let classNames = "description";
+    let classNames = 'description'
     if (done) {
-      classNames += " completed";
+      classNames += ' completed'
     }
 
     return (
@@ -33,6 +25,6 @@ export default class Task extends React.Component {
           <button className="icon icon-destroy" onClick={onDeleted}></button>
         </div>
       </span>
-    );
+    )
   }
 }

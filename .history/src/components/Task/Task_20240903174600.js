@@ -1,15 +1,8 @@
-import React from "react";
+import React from 'react'
 
-import "./Task.css";
+import './Task.css'
 
-const Task = ({
-  descriptionText,
-  createdText,
-  input2Class,
-  input2Type,
-  input2defaultValue,
-}) => {
-
+const Task = ({ descriptionText, createdText, input2Class, input2Type, input2defaultValue }) => {
   return (
     <div className="view">
       <input className="toggle" type="checkbox" />
@@ -22,7 +15,7 @@ const Task = ({
       {/* <input type={input2Type} className={input2Class} value={input2defaultValue}></input> */}
     </div>
     // <AdditionalInput />
-  );
-};
+  )
+}
 
-export default Task;
+export default Task

@@ -1,14 +1,8 @@
-import React from "react";
+import React from 'react'
 
-import "./Task.css";
+import './Task.css'
 
-const Task = ({
-  descriptionText,
-  createdText,
-  inputType,
-  inputDefaultValue,
-}) => {
-
+const Task = ({ descriptionText, createdText, inputType, inputDefaultValue }) => {
   // let AdditionalInput;
 
   // if (input2Class) {
@@ -32,7 +26,7 @@ const Task = ({
       </div>
       {/* <AdditionalInput /> */}
     </span>
-  );
-};
+  )
+}
 
-export default Task;
+export default Task

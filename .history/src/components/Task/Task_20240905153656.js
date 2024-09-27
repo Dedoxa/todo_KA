@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react'
 
-import "./Task.css";
+import './Task.css'
 
 export default class Task extends React.Component {
   state = {
@@ -8,12 +8,12 @@ export default class Task extends React.Component {
   };
 
   onTaskClick = () => {
-    this.setState(({done}) => {
+    this.setState(({ done }) => {
       return {
-        done: !done
+        done: !done,
       }
     })
-  }
+  };
 
   render() {
     /*AdditionalInput() {
@@ -30,7 +30,7 @@ export default class Task extends React.Component {
       }
     }*/
 
-    const {done} = this.state
+    const { done } = this.state
 
     const {
       descriptionText,
@@ -41,9 +41,9 @@ export default class Task extends React.Component {
       // inputDefaultValue
     } = this.props
 
-    let classNames = "description";
+    let classNames = 'description'
     if (done) {
-      classNames += " completed";
+      classNames += ' completed'
     }
 
     return (
@@ -51,7 +51,9 @@ export default class Task extends React.Component {
         <div className="view">
           <input className="toggle" type="checkbox" />
           <label>
-            <span className={classNames} onClick={this.onTaskClick}>{descriptionText}</span>
+            <span className={classNames} onClick={this.onTaskClick}>
+              {descriptionText}
+            </span>
             <span className="created">{createdText}</span>
           </label>
           <button className="icon icon-edit"></button>
@@ -59,6 +61,6 @@ export default class Task extends React.Component {
         </div>
         {/* <AdditionalInput /> */}
       </span>
-    );
+    )
   }
 }

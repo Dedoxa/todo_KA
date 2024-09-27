@@ -1,15 +1,16 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Task from "../Task/Task";
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import "./TaskList.css";
+import Task from '../Task/Task'
+
+import './TaskList.css'
 
 export default class TaskList extends React.Component {
   static defaultProps = {
     data: [
       {
-        descriptionText: "TaskList.defaultTask",
-        dateOfCreation: "TaskList.defaultDate",
+        descriptionText: 'TaskList.defaultTask',
+        dateOfCreation: 'TaskList.defaultDate',
         edit: false,
         done: false,
         hidden: false,
@@ -17,18 +18,18 @@ export default class TaskList extends React.Component {
       },
     ],
     onDeleted: () => {
-      alert("TaskList.defaultFunction");
+      alert('TaskList.defaultFunction')
     },
     onToggleDone: () => {
-      alert("TaskList.defaultFunction");
+      alert('TaskList.defaultFunction')
     },
     onEdit: () => {
-      alert("TaskList.defaultFunction");
+      alert('TaskList.defaultFunction')
     },
     onRewrite: () => {
-      alert("TaskList.defaultFunction");
+      alert('TaskList.defaultFunction')
     },
-  };
+  }
 
   static propTypes = {
     data: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -39,10 +40,10 @@ export default class TaskList extends React.Component {
   }
 
   render() {
-    const { data, onDeleted, onToggleDone, onEdit, onRewrite } = this.props;
+    const { data, onDeleted, onToggleDone, onEdit, onRewrite } = this.props
 
     const tasks = data.map((item) => {
-      const { id, ...itemProps } = item;
+      const { id, ...itemProps } = item
 
       return (
         <Task
@@ -54,9 +55,9 @@ export default class TaskList extends React.Component {
           onEdit={() => onEdit(id)}
           onRewrite={onRewrite}
         />
-      );
-    });
+      )
+    })
 
-    return <ul className="todo-list"> {tasks} </ul>;
+    return <ul className="todo-list"> {tasks} </ul>
   }
 }

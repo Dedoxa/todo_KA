@@ -1,36 +1,37 @@
-import React from "react";
-import Footer from "./components/Footer/Footer";
-import NewTaskForm from "./components/NewTaskForm/NewTaskForm";
-import TaskList from "./components/TaskList/TaskList";
+import React from 'react'
 
-import "./App.css";
+import Footer from './components/Footer/Footer'
+import NewTaskForm from './components/NewTaskForm/NewTaskForm'
+import TaskList from './components/TaskList/TaskList'
+
+import './App.css'
 
 export default class App extends React.Component {
-  startId = 0
+  startId = 0;
 
   state = {
     tasks: [
       {
         id: 1,
-        liClass: "",
-        descriptionText: "Completed task",
-        createdText: "created 17 seconds ago",
+        liClass: '',
+        descriptionText: 'Completed task',
+        createdText: 'created 17 seconds ago',
       },
 
       {
         id: 2,
-        liClass: "editing",
-        descriptionText: "Editing task",
-        createdText: "created 5 minutes ago",
-        inputClass: "edit",
-        inputType: "text",
-        inputDefaultValue: "Editing task"
+        liClass: 'editing',
+        descriptionText: 'Editing task',
+        createdText: 'created 5 minutes ago',
+        inputClass: 'edit',
+        inputType: 'text',
+        inputDefaultValue: 'Editing task',
       },
 
       {
         id: 3,
-        descriptionText: "Active task",
-        createdText: "created 5 minutes ago",
+        descriptionText: 'Active task',
+        createdText: 'created 5 minutes ago',
       },
     ],
   };
@@ -46,19 +47,19 @@ export default class App extends React.Component {
   createTask(text) {
     return {
       descriptionText: text,
-      createdText: "created ? ago",
+      createdText: 'created ? ago',
       id: this.maxId++,
-    };
+    }
   }
 
   deleteItem = (id) => {
     this.setState(({ tasks }) => {
-      const idx = tasks.findIndex((el) => el.id === id);
-      const newArray = tasks.toSpliced(idx, 1);
+      const idx = tasks.findIndex((el) => el.id === id)
+      const newArray = tasks.toSpliced(idx, 1)
       return {
         tasks: newArray,
-      };
-    });
+      }
+    })
   };
 
   render() {
@@ -73,6 +74,6 @@ export default class App extends React.Component {
           <Footer />
         </section>
       </section>
-    );
+    )
   }
 }

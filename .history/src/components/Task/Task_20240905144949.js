@@ -1,28 +1,22 @@
-import React from "react";
+import React from 'react'
 
-import "./Task.css";
+import './Task.css'
 
 export default class Task extends React.Component {
   state = {
     done: false,
-    descriptionText: "",
-    createdText: "",
-    inputClass: "",
-    inputType: "",
-    inputDefaultValue: "",
+    descriptionText: '',
+    createdText: '',
+    inputClass: '',
+    inputType: '',
+    inputDefaultValue: '',
   };
 
   AdditionalImput(data) {
     if (inputClass) {
-      return (
-        <input
-          type={inputType}
-          className={inputClass}
-          value={inputDefaultValue}
-        ></input>
-      );
+      return <input type={inputType} className={inputClass} value={inputDefaultValue}></input>
     } else {
-      return null;
+      return null
     }
   }
 
@@ -40,6 +34,6 @@ export default class Task extends React.Component {
         </div>
         <AdditionalImput />
       </span>
-    );
+    )
   }
 }

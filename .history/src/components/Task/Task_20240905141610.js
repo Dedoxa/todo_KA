@@ -1,21 +1,12 @@
-import React from "react";
+import React from 'react'
 
-import "./Task.css";
+import './Task.css'
 
-const Task = ({
-  descriptionText,
-  createdText,
-  inputClass,
-  inputType,
-  inputDefaultValue,
-}) => {
-
+const Task = ({ descriptionText, createdText, inputClass, inputType, inputDefaultValue }) => {
   if (inputClass) {
-    
   } else {
-    
   }
-  
+
   return (
     <span>
       <div className="view">
@@ -29,7 +20,7 @@ const Task = ({
       </div>
       <input type={inputType} className={inputClass} value={inputDefaultValue}></input>
     </span>
-  );
-};
+  )
+}
 
-export default Task;
+export default Task

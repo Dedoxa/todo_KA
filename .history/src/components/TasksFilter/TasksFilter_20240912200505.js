@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react'
 
-import "./TasksFilter.css";
+import './TasksFilter.css'
 
 const TasksFilter = ({ tasksList }) => {
   return (
@@ -9,13 +9,13 @@ const TasksFilter = ({ tasksList }) => {
         <button className="selected">All</button>
       </li>
       <li>
-        <button onClick={() => console.log("Filtering by Active is working")}>Active</button>
+        <button onClick={() => console.log('Filtering by Active is working')}>Active</button>
       </li>
       <li>
-        <button onClick={() => console.log("Filtering by Completed is working")}>Completed</button>
+        <button onClick={() => console.log('Filtering by Completed is working')}>Completed</button>
       </li>
     </ul>
-  );
-};
+  )
+}
 
-export default TasksFilter;
+export default TasksFilter

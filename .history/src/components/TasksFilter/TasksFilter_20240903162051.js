@@ -1,25 +1,26 @@
-import React from "react";
+import React from 'react'
 
-import "./TasksFilter.css";
+import './TasksFilter.css'
 
 const TasksFilter = () => {
   return (
     <ul className="filters">
-    <li>
-      <button className="selected">All</button>
-    </li>
-      </ul>
-  );
-};
+      <li>
+        <button className="selected">All</button>
+      </li>
+    </ul>
+  )
+}
 
-export default TasksFilter;
+export default TasksFilter
 
-
-{/* 
+{
+  /* 
 <li>
   <button>Active</button>
 </li>
 <li>
   <button>Completed</button>
 </li>
-*/}
+*/
+}

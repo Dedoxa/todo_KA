@@ -1,9 +1,10 @@
-import React from "react";
-import TasksFilter from "../TasksFilter/TasksFilter";
+import React from 'react'
 
-import "./Footer.css";
+import TasksFilter from '../TasksFilter/TasksFilter'
 
-const Footer = ({tasksSumm}) => {
+import './Footer.css'
+
+const Footer = ({ tasksSumm }) => {
   console.log(tasksSumm)
   return (
     <footer className="footer">
@@ -11,7 +12,7 @@ const Footer = ({tasksSumm}) => {
       <TasksFilter />
       <button className="clear-completed">Clear completed</button>
     </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

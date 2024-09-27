@@ -1,0 +1,7 @@
+# Ignore artifacts:
+node_modules
+.history
+/.vscode
+/.git
+build
+coverage

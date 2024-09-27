@@ -1,16 +1,19 @@
-import React from "react";
-import TasksFilter from "../TasksFilter/TasksFilter";
+import React from 'react'
 
-import "./Footer.css";
+import TasksFilter from '../TasksFilter/TasksFilter'
 
-const Footer = ({data, tasksSumm, onClearCompleted}) => {
+import './Footer.css'
+
+const Footer = ({ data, tasksSumm, onClearCompleted }) => {
   return (
     <footer className="footer">
       <span className="todo-count">{tasksSumm} items left</span>
-      <TasksFilter tasksList={data}/>
-      <button className="clear-completed" onClick={() => onClearCompleted()}>Clear completed</button>
+      <TasksFilter tasksList={data} />
+      <button className="clear-completed" onClick={() => onClearCompleted()}>
+        Clear completed
+      </button>
     </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

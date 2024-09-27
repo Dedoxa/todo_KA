@@ -1,21 +1,21 @@
-import React from "react";
-import { formatDistanceToNow } from "date-fns";
-import PropTypes from "prop-types";
+import React from 'react'
+import { formatDistanceToNow } from 'date-fns'
+import PropTypes from 'prop-types'
 
-import "./Task.css";
+import './Task.css'
 
 export default class Task extends React.Component {
   static defaultProps = {
     id: -1,
-    descriptionText: "defaultText",
-    dateOfCreation: "defaultDate",
+    descriptionText: 'defaultText',
+    dateOfCreation: 'defaultDate',
     onDeleted: () => {
-      alert("Task.defaultFunction");
+      alert('Task.defaultFunction')
     },
     done: false,
     hidden: false,
     onToggleDone: () => {
-      alert("Task.defaultFunction");
+      alert('Task.defaultFunction')
     },
   };
 
@@ -30,42 +30,30 @@ export default class Task extends React.Component {
   };
 
   render() {
-    const {
-      id,
-      descriptionText,
-      dateOfCreation,
-      onDeleted,
-      done,
-      hidden,
-      onToggleDone,
-    } = this.props;
+    const { id, descriptionText, dateOfCreation, onDeleted, done, hidden, onToggleDone } = this.props
 
-    let divClasses = "view";
-    let checkBoxState = "";
+    let divClasses = 'view'
+    let checkBoxState = ''
 
     if (done) {
-      divClasses += " completed";
-      checkBoxState = "checked";
+      divClasses += ' completed'
+      checkBoxState = 'checked'
     } else {
-      divClasses.replace(" completed", "");
-      checkBoxState = "";
+      divClasses.replace(' completed', '')
+      checkBoxState = ''
     }
 
-    hidden
-      ? (divClasses += " hidden")
-      : divClasses.replace(" hidden", "");
+    hidden ? (divClasses += ' hidden') : divClasses.replace(' hidden', '')
 
     return (
       <li key={id}>
         <div className={divClasses}>
-          <input className="toggle" type="checkbox" onClick={onToggleDone} checked={checkBoxState}/>
+          <input className="toggle" type="checkbox" onClick={onToggleDone} checked={checkBoxState} />
           <label>
             <span className="description" onClick={onToggleDone}>
               {descriptionText}
             </span>
-            <span className="created">{`created ${formatDistanceToNow(
-              dateOfCreation
-            )} ago`}</span>
+            <span className="created">{`created ${formatDistanceToNow(dateOfCreation)} ago`}</span>
           </label>
           <button className="icon icon-edit"></button>
           <button className="icon icon-destroy" onClick={onDeleted}></button>
@@ -73,12 +61,12 @@ export default class Task extends React.Component {
         <input
           type="text"
           className="edit"
-          value={"Editing task"}
+          value={'Editing task'}
           onChange={() => {
-            console.log("edit works");
+            console.log('edit works')
           }}
         ></input>
       </li>
-    );
+    )
   }
 }

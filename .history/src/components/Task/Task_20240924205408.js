@@ -1,25 +1,25 @@
-import React from "react";
-import { formatDistanceToNow } from "date-fns";
-import PropTypes from "prop-types";
+import React from 'react'
+import { formatDistanceToNow } from 'date-fns'
+import PropTypes from 'prop-types'
 
-import "./Task.css";
+import './Task.css'
 
 export default class Task extends React.Component {
   static defaultProps = {
     id: -1,
-    descriptionText: "defaultText",
-    dateOfCreation: "defaultDate",
+    descriptionText: 'defaultText',
+    dateOfCreation: 'defaultDate',
     onDeleted: () => {
-      alert("Task.defaultFunction");
+      alert('Task.defaultFunction')
     },
     edit: false,
     done: false,
     hidden: false,
     onToggleDone: () => {
-      alert("Task.defaultFunction");
+      alert('Task.defaultFunction')
     },
     onEdit: () => {
-      alert("Task.defaultFunction");
+      alert('Task.defaultFunction')
     },
   };
 
@@ -36,62 +36,45 @@ export default class Task extends React.Component {
   };
 
   state = {
-    descriptionText: "",
-  }
+    descriptionText: '',
+  };
 
   onInputChange = (e) => {
     this.setState({
       descriptionText: e.target.value,
-    });
+    })
   };
 
   render() {
-    const {
-      id,
-      descriptionText,
-      dateOfCreation,
-      onDeleted,
-      edit,
-      done,
-      hidden,
-      onToggleDone,
-      onEdit,
-    } = this.props;
+    const { id, descriptionText, dateOfCreation, onDeleted, edit, done, hidden, onToggleDone, onEdit } = this.props
 
-    let liClassNames = "";
-    let divClasses = "view";
-    let checkBoxState = "";
+    let liClassNames = ''
+    let divClasses = 'view'
+    let checkBoxState = ''
 
-    edit ? (liClassNames = "editing") : (liClassNames = "");
+    edit ? (liClassNames = 'editing') : (liClassNames = '')
 
     if (done) {
-      divClasses += " completed";
-      checkBoxState = true;
+      divClasses += ' completed'
+      checkBoxState = true
     } else {
-      divClasses.replace(" completed", "");
-      checkBoxState = false;
+      divClasses.replace(' completed', '')
+      checkBoxState = false
     }
 
-    hidden ? (divClasses += " hidden") : divClasses.replace(" hidden", "");
+    hidden ? (divClasses += ' hidden') : divClasses.replace(' hidden', '')
 
     return (
       <li key={id} className={liClassNames}>
         <div className={divClasses}>
-          <input
-            className="toggle"
-            type="checkbox"
-            onClick={onToggleDone}
-            checked={checkBoxState}
-            readOnly
-          />
+          <input className="toggle" type="checkbox" onClick={onToggleDone} checked={checkBoxState} readOnly />
           <label>
             <span className="description" onClick={onToggleDone}>
               {descriptionText}
             </span>
-            <span className="created">{`created ${formatDistanceToNow(
-              dateOfCreation,
-              { includeSeconds: true }
-            )} ago`}</span>
+            <span className="created">{`created ${formatDistanceToNow(dateOfCreation, {
+              includeSeconds: true,
+            })} ago`}</span>
           </label>
           <button className="icon icon-edit" onClick={onEdit}></button>
           <button className="icon icon-destroy" onClick={onDeleted}></button>
@@ -99,12 +82,12 @@ export default class Task extends React.Component {
         <input
           type="text"
           className="edit"
-          value={"Editing task"}
+          value={'Editing task'}
           onChange={() => {
-            console.log("edit works");
+            console.log('edit works')
           }}
         ></input>
       </li>
-    );
+    )
   }
 }

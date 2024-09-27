@@ -1,25 +1,25 @@
-import React from "react";
+import React from 'react'
 
-import "./NewTaskForm.css";
+import './NewTaskForm.css'
 
 export default class NewTaskForm extends React.Component {
   state = {
-    descriptionText: "",
+    descriptionText: '',
   };
 
   onInputChange = (e) => {
     this.setState({
       descriptionText: e.target.value,
-    });
+    })
   };
 
   onSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     this.props.onItemAdded(this.state.descriptionText)
     this.setState({
-      descriptionText: "",
+      descriptionText: '',
     })
-  }
+  };
 
   render() {
     return (
@@ -33,6 +33,6 @@ export default class NewTaskForm extends React.Component {
           value={this.state.descriptionText}
         />
       </form>
-    );
+    )
   }
 }

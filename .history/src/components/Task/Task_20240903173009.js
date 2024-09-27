@@ -1,23 +1,14 @@
-import React from "react";
+import React from 'react'
 
-import "./Task.css";
+import './Task.css'
 
-const Task = ({
-  descriptionText,
-  createdText,
-  input2Class,
-  input2Type,
-  input2defaultValue,
-}) => {
-
-  let AdditionalInput;
+const Task = ({ descriptionText, createdText, input2Class, input2Type, input2defaultValue }) => {
+  let AdditionalInput
 
   if (input2Class) {
-    AdditionalInput = (
-      <input type={input2Type} className={input2Class} value={input2defaultValue}></input>
-    )
+    AdditionalInput = <input type={input2Type} className={input2Class} value={input2defaultValue}></input>
   } else {
-    AdditionalInput = null;
+    AdditionalInput = null
   }
 
   return (
@@ -31,10 +22,10 @@ const Task = ({
       <button className="icon icon-destroy"></button>
     </div>
     // <AdditionalInput />
-  );
-};
+  )
+}
 
-export default Task;
+export default Task
 
 {
   /*

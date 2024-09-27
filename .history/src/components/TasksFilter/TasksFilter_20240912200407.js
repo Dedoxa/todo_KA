@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react'
 
-import "./TasksFilter.css";
+import './TasksFilter.css'
 
 const TasksFilter = ({ tasksList }) => {
   return (
@@ -15,7 +15,7 @@ const TasksFilter = ({ tasksList }) => {
         <button>Completed</button>
       </li>
     </ul>
-  );
-};
+  )
+}
 
-export default TasksFilter;
+export default TasksFilter

@@ -1,11 +1,9 @@
-import React from "react";
+import React from 'react'
 
-import "./TaskFilter.css";
+import './TaskFilter.css'
 
 const TaskFilter = () => {
-  return (
-    <></>
-  );
-};
+  return <></>
+}
 
-export default TaskFilter;
+export default TaskFilter

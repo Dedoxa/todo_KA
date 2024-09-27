@@ -1,28 +1,27 @@
-import React from "react";
+import React from 'react'
 
-import "./Task.css";
+import './Task.css'
 
-const Task = ({ descriptionText, createdText, input2Class, input2Type, input2defaultValue}) => {
-
+const Task = ({ descriptionText, createdText, input2Class, input2Type, input2defaultValue }) => {
   /*
   if liClass
   if Input2
   */
 
   return (
-      <div className="view">
-        <input className="toggle" type="checkbox" />
-        <label>
-          <span className="description">{tasks.descriptionText}</span>
-          <span className="created">{tasks.createdText}</span>
-        </label>
-        <button className="icon icon-edit"></button>
-        <button className="icon icon-destroy"></button>
-      </div>
-  );
-};
+    <div className="view">
+      <input className="toggle" type="checkbox" />
+      <label>
+        <span className="description">{tasks.descriptionText}</span>
+        <span className="created">{tasks.createdText}</span>
+      </label>
+      <button className="icon icon-edit"></button>
+      <button className="icon icon-destroy"></button>
+    </div>
+  )
+}
 
-export default Task;
+export default Task
 
 {
   /*

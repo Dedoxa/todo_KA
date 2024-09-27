@@ -1,13 +1,9 @@
-import React from "react";
+import React from 'react'
 
-import "./NewTaskForm.css";
+import './NewTaskForm.css'
 
 export default class NewTaskForm extends React.Component {
   render() {
-    <input
-      className="new-todo"
-      placeholder="What needs to be done?"
-      autoFocus
-    />
-  };
-};
+    <input className="new-todo" placeholder="What needs to be done?" autoFocus />
+  }
+}

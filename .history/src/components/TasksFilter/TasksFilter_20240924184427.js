@@ -1,19 +1,19 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import "./TasksFilter.css";
+import './TasksFilter.css'
 
 export default class TasksFilter extends React.Component {
   static defaultProps = {
-    footerFiler: "default",
+    footerFiler: 'default',
     onShowAll: () => {
-      alert("Footer.TasksFilter.defaultfunction");
+      alert('Footer.TasksFilter.defaultfunction')
     },
     onShowCompleted: () => {
-      alert("Footer.TasksFilter.defaultfunction");
+      alert('Footer.TasksFilter.defaultfunction')
     },
     onShowActive: () => {
-      alert("Footer.TasksFilter.defaultfunction");
+      alert('Footer.TasksFilter.defaultfunction')
     },
   };
 
@@ -25,30 +25,29 @@ export default class TasksFilter extends React.Component {
   };
 
   render() {
-    const { footerFiler, onShowAll, onShowCompleted, onShowActive } = this.props;
+    const { footerFiler, onShowAll, onShowCompleted, onShowActive } = this.props
 
-    let allClassNames = "";
-    let completedClassNames = "";
-    let activeClassNames = "";
+    let allClassNames = ''
+    let completedClassNames = ''
+    let activeClassNames = ''
 
     switch (footerFiler) {
-      case "All":
-        allClassNames = "selected";
-        completedClassNames = "";
-        activeClassNames = "";
-        break;
-      case "Completed":
-        allClassNames = "";
-        completedClassNames = "selected";
-        activeClassNames = "";
-        break;
-      case "Active":
-        allClassNames = "";
-        completedClassNames = "";
-        activeClassNames = "selected";
-        break;
-      default:
-
+    case 'All':
+      allClassNames = 'selected'
+      completedClassNames = ''
+      activeClassNames = ''
+      break
+    case 'Completed':
+      allClassNames = ''
+      completedClassNames = 'selected'
+      activeClassNames = ''
+      break
+    case 'Active':
+      allClassNames = ''
+      completedClassNames = ''
+      activeClassNames = 'selected'
+      break
+    default:
     }
 
     return (
@@ -69,6 +68,6 @@ export default class TasksFilter extends React.Component {
           </button>
         </li>
       </ul>
-    );
+    )
   }
 }

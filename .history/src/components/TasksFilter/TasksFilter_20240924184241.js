@@ -1,19 +1,19 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import "./TasksFilter.css";
+import './TasksFilter.css'
 
 export default class TasksFilter extends React.Component {
   static defaultProps = {
-    footerFiler: "default",
+    footerFiler: 'default',
     onShowAll: () => {
-      alert("Footer.TasksFilter.defaultfunction");
+      alert('Footer.TasksFilter.defaultfunction')
     },
     onShowCompleted: () => {
-      alert("Footer.TasksFilter.defaultfunction");
+      alert('Footer.TasksFilter.defaultfunction')
     },
     onShowActive: () => {
-      alert("Footer.TasksFilter.defaultfunction");
+      alert('Footer.TasksFilter.defaultfunction')
     },
   };
 
@@ -25,16 +25,16 @@ export default class TasksFilter extends React.Component {
   };
 
   render() {
-    const { footerFiler, onShowAll, onShowCompleted, onShowActive } = this.props;
+    const { footerFiler, onShowAll, onShowCompleted, onShowActive } = this.props
 
-    let allClassNames = "";
-    let completedClassNames = "";
-    let activeClassNames = "";
+    let allClassNames = ''
+    let completedClassNames = ''
+    let activeClassNames = ''
 
-    if (footerFiler === "All") {
-      allClassNames = "selected";
-        completedClassNames = "";
-        activeClassNames = "";
+    if (footerFiler === 'All') {
+      allClassNames = 'selected'
+      completedClassNames = ''
+      activeClassNames = ''
     }
 
     // switch (footerFiler) {
@@ -73,6 +73,6 @@ export default class TasksFilter extends React.Component {
           </button>
         </li>
       </ul>
-    );
+    )
   }
 }

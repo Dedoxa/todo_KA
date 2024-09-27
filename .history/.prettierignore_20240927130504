@@ -1,0 +1,4 @@
+# Ignore artifacts:
+.history
+build
+coverage

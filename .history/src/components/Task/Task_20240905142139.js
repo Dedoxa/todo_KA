@@ -1,26 +1,13 @@
-import React from "react";
+import React from 'react'
 
-import "./Task.css";
+import './Task.css'
 
-const Task = ({
-  descriptionText,
-  createdText,
-  inputClass,
-  inputType,
-  inputDefaultValue,
-}) => {
-  
+const Task = ({ descriptionText, createdText, inputClass, inputType, inputDefaultValue }) => {
   function AdditionalImput(props) {
     if (inputClass) {
-      return (
-        <input
-          type={inputType}
-          className={inputClass}
-          value={inputDefaultValue}
-        ></input>
-      );
+      return <input type={inputType} className={inputClass} value={inputDefaultValue}></input>
     } else {
-      return null;
+      return null
     }
   }
 
@@ -37,7 +24,7 @@ const Task = ({
       </div>
       <AdditionalImput />
     </span>
-  );
-};
+  )
+}
 
-export default Task;
+export default Task

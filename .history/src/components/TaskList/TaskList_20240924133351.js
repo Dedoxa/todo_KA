@@ -1,43 +1,37 @@
-import React from "react";
-import Task from "../Task/Task";
+import React from 'react'
 
-import "./TaskList.css";
+import Task from '../Task/Task'
+
+import './TaskList.css'
 
 export default class TaskList extends React.Component {
   static defaultProps = {
     data: [
       {
-        descriptionText: "TaskList.defaultTask",
-        createdText: "TaskList.defaultTask",
+        descriptionText: 'TaskList.defaultTask',
+        createdText: 'TaskList.defaultTask',
         done: false,
         hidden: false,
         id: -1,
       },
     ],
     onDeleted: () => {
-      alert("TaskList.defaultFunction");
+      alert('TaskList.defaultFunction')
     },
     onToggleDone: () => {
-      alert("TaskList.defaultFunction");
+      alert('TaskList.defaultFunction')
     },
   };
 
   render() {
-    const { data, onDeleted, onToggleDone } = this.props;
+    const { data, onDeleted, onToggleDone } = this.props
 
     const tasks = data.map((item) => {
-      const { id, ...itemProps } = item;
+      const { id, ...itemProps } = item
 
-      return (
-        <Task
-          {...itemProps}
-          key={true}
-          onDeleted={() => onDeleted(id)}
-          onToggleDone={() => onToggleDone(id)}
-        />
-      );
-    });
+      return <Task {...itemProps} key={true} onDeleted={() => onDeleted(id)} onToggleDone={() => onToggleDone(id)} />
+    })
 
-    return <ul className="todo-list"> {tasks} </ul>;
+    return <ul className="todo-list"> {tasks} </ul>
   }
 }

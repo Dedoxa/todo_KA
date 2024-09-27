@@ -1,13 +1,11 @@
-import React from "react";
+import React from 'react'
 
-import "./Task.css";
+import './Task.css'
 
 export default class Task extends React.Component {
   state = {
     done: false,
   };
-
-  
 
   render() {
     /*AdditionalInput() {
@@ -24,7 +22,7 @@ export default class Task extends React.Component {
       }
     }*/
 
-    const {done} = this.state
+    const { done } = this.state
 
     const {
       descriptionText,
@@ -35,9 +33,9 @@ export default class Task extends React.Component {
       // inputDefaultValue
     } = this.props
 
-    let classNames = "description";
+    let classNames = 'description'
     if (done) {
-      classNames += " completed";
+      classNames += ' completed'
     }
 
     return (
@@ -53,6 +51,6 @@ export default class Task extends React.Component {
         </div>
         {/* <AdditionalInput /> */}
       </span>
-    );
+    )
   }
 }

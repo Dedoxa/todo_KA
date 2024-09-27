@@ -1,24 +1,25 @@
-import React from "react";
-import PropTypes from "prop-types";
-import TasksFilter from "../TasksFilter/TasksFilter";
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import "./Footer.css";
+import TasksFilter from '../TasksFilter/TasksFilter'
+
+import './Footer.css'
 
 export default class Footer extends React.Component {
   static defaultProps = {
     data: [
       {
-        descriptionText: "Footer.defaultTask",
-        createdText: "Footer.defaultTask",
+        descriptionText: 'Footer.defaultTask',
+        createdText: 'Footer.defaultTask',
         done: false,
         hidden: false,
         id: -1,
       },
     ],
-    footerFilter: "default",
-    tasksSumm: "defaultTasksSumm",
+    footerFilter: 'default',
+    tasksSumm: 'defaultTasksSumm',
     onClearCompleted: () => {
-      alert("Footer.defaultFunction");
+      alert('Footer.defaultFunction')
     },
   };
 
@@ -26,11 +27,10 @@ export default class Footer extends React.Component {
     data: PropTypes.arrayOf(PropTypes.object).isRequired,
     tasksSumm: PropTypes.number,
     onClearCompleted: PropTypes.func,
-  }
+  };
 
   render() {
-    const { data, tasksSumm, onClearCompleted, ...filterFunctions } =
-      this.props;
+    const { data, tasksSumm, onClearCompleted, ...filterFunctions } = this.props
     return (
       <footer className="footer">
         <span className="todo-count">{tasksSumm} items left</span>
@@ -39,6 +39,6 @@ export default class Footer extends React.Component {
           Clear completed
         </button>
       </footer>
-    );
+    )
   }
 }

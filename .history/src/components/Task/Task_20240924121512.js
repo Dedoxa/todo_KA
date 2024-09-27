@@ -1,32 +1,20 @@
-import React from "react";
+import React from 'react'
 
-import "./Task.css";
+import './Task.css'
 
 export default class Task extends React.Component {
+  static defaultProps = {};
 
-  static defaultProps = {
-    
-  }
-  
   render() {
-    
-    const {
-      id,
-      descriptionText,
-      createdText,
-      onDeleted,
-      done,
-      hidden,
-      onToggleDone,
-    } = this.props;
-    
-    let classNames = "";
+    const { id, descriptionText, createdText, onDeleted, done, hidden, onToggleDone } = this.props
+
+    let classNames = ''
     if (done) {
-      classNames += " completed";
+      classNames += ' completed'
     }
 
     if (hidden) {
-      classNames += " hidden";
+      classNames += ' hidden'
     }
 
     return (
@@ -42,7 +30,7 @@ export default class Task extends React.Component {
           <button className="icon icon-edit"></button>
           <button className="icon icon-destroy" onClick={onDeleted}></button>
         </div>
-        </li>
-    );
+      </li>
+    )
   }
 }

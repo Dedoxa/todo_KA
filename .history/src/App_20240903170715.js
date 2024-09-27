@@ -1,9 +1,10 @@
-import React from "react";
-import Footer from './components/Footer/Footer';
-import NewTaskForm from './components/NewTaskForm/NewTaskForm';
-import TaskList from './components/TaskList/TaskList';
+import React from 'react'
 
-import "./App.css";
+import Footer from './components/Footer/Footer'
+import NewTaskForm from './components/NewTaskForm/NewTaskForm'
+import TaskList from './components/TaskList/TaskList'
+
+import './App.css'
 
 const App = () => {
   return (
@@ -13,11 +14,11 @@ const App = () => {
         <NewTaskForm />
       </header>
       <section className="main">
-        <TaskList  tasks = {tasks}/>
+        <TaskList tasks={tasks} />
         <Footer />
       </section>
     </section>
-  );
-};
+  )
+}
 
-export default App;
+export default App

@@ -1,21 +1,23 @@
-import React from "react";
+import React from 'react'
 
-import "./Task.css";
+import './Task.css'
 
 export default class Task extends React.Component {
-
   static defaultProps = {
     id: -1,
-    descriptionText: "defaultText",
-    createdText: "defaultText",
-    onDeleted: () => {console.log("defaultFunction")},
+    descriptionText: 'defaultText',
+    createdText: 'defaultText',
+    onDeleted: () => {
+      console.log('defaultFunction')
+    },
     done: false,
     hidden: false,
-    onToggleDone: () => {console.log("defaultFunction")},
-  }
-  
+    onToggleDone: () => {
+      console.log('defaultFunction')
+    },
+  };
+
   render() {
-    
     // const {
     //   id,
     //   descriptionText,
@@ -25,14 +27,14 @@ export default class Task extends React.Component {
     //   hidden,
     //   onToggleDone,
     // } = this.props;
-    
-    let classNames = "";
+
+    let classNames = ''
     if (Task.defaultProps.done) {
-      classNames += " completed";
+      classNames += ' completed'
     }
 
     if (Task.defaultProps.hidden) {
-      classNames += " hidden";
+      classNames += ' hidden'
     }
 
     return (
@@ -48,7 +50,7 @@ export default class Task extends React.Component {
           <button className="icon icon-edit"></button>
           <button className="icon icon-destroy" onClick={Task.defaultProps.onDeleted}></button>
         </div>
-        </li>
-    );
+      </li>
+    )
   }
 }

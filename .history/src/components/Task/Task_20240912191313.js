@@ -1,9 +1,8 @@
-import React from "react";
+import React from 'react'
 
-import "./Task.css";
+import './Task.css'
 
 export default class Task extends React.Component {
-
   render() {
     /*AdditionalInput() {
       if (inputClass) {
@@ -19,7 +18,7 @@ export default class Task extends React.Component {
       }
     }*/
 
-    const { done, onToggleDone } = this.state;
+    const { done, onToggleDone } = this.state
 
     const {
       descriptionText,
@@ -28,11 +27,11 @@ export default class Task extends React.Component {
       // inputClass,
       // inputType,
       // inputDefaultValue
-    } = this.props;
-    
-    let classNames = "description";
+    } = this.props
+
+    let classNames = 'description'
     if (done) {
-      classNames += " completed";
+      classNames += ' completed'
     }
 
     return (
@@ -50,6 +49,6 @@ export default class Task extends React.Component {
         </div>
         {/* <AdditionalInput /> */}
       </span>
-    );
+    )
   }
 }

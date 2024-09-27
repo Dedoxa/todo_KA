@@ -1,21 +1,21 @@
-import React from "react";
-import { formatDistanceToNow } from "date-fns";
-import PropTypes from "prop-types";
+import React from 'react'
+import { formatDistanceToNow } from 'date-fns'
+import PropTypes from 'prop-types'
 
-import "./Task.css";
+import './Task.css'
 
 export default class Task extends React.Component {
   static defaultProps = {
     id: -1,
-    descriptionText: "defaultText",
-    dateOfCreation: "defaultDate",
+    descriptionText: 'defaultText',
+    dateOfCreation: 'defaultDate',
     onDeleted: () => {
-      alert("Task.defaultFunction");
+      alert('Task.defaultFunction')
     },
     done: false,
     hidden: false,
     onToggleDone: () => {
-      alert("Task.defaultFunction");
+      alert('Task.defaultFunction')
     },
   };
 
@@ -30,23 +30,15 @@ export default class Task extends React.Component {
   };
 
   render() {
-    const {
-      id,
-      descriptionText,
-      dateOfCreation,
-      onDeleted,
-      done,
-      hidden,
-      onToggleDone,
-    } = this.props;
+    const { id, descriptionText, dateOfCreation, onDeleted, done, hidden, onToggleDone } = this.props
 
-    let classNames = "";
+    let classNames = ''
     if (done) {
-      classNames += " completed";
+      classNames += ' completed'
     }
 
     if (hidden) {
-      classNames += " hidden";
+      classNames += ' hidden'
     }
 
     return (
@@ -62,8 +54,15 @@ export default class Task extends React.Component {
           <button className="icon icon-edit"></button>
           <button className="icon icon-destroy" onClick={onDeleted}></button>
         </div>
-        <input type="text" className="edit" value={"Editing task"} onChange={() => {console.log("edit works")}}></input>
+        <input
+          type="text"
+          className="edit"
+          value={'Editing task'}
+          onChange={() => {
+            console.log('edit works')
+          }}
+        ></input>
       </li>
-    );
+    )
   }
 }

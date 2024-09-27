@@ -1,18 +1,19 @@
-import React from "react";
-import Footer from "./components/Footer/Footer";
-import NewTaskForm from "./components/NewTaskForm/NewTaskForm";
-import TaskList from "./components/TaskList/TaskList";
+import React from 'react'
 
-import "./App.css";
+import Footer from './components/Footer/Footer'
+import NewTaskForm from './components/NewTaskForm/NewTaskForm'
+import TaskList from './components/TaskList/TaskList'
+
+import './App.css'
 
 export default class App extends React.Component {
   state = {
     tasks: [
       {
         id: 1,
-        liClass: "completed",
-        descriptionText: "Completed task",
-        createdText: "created 17 seconds ago",
+        liClass: 'completed',
+        descriptionText: 'Completed task',
+        createdText: 'created 17 seconds ago',
       },
 
       // {
@@ -27,22 +28,22 @@ export default class App extends React.Component {
 
       {
         id: 3,
-        descriptionText: "Active task",
-        createdText: "created 5 minutes ago",
+        descriptionText: 'Active task',
+        createdText: 'created 5 minutes ago',
       },
     ],
   };
 
   deleteItem = (id) => {
     this.setState(({ tasks }) => {
-      const idx = tasks.findIndex((el) => el.id === id);
-      console.log(idx);
-      const newArray = tasks.slice(idx, 1);
+      const idx = tasks.findIndex((el) => el.id === id)
+      console.log(idx)
+      const newArray = tasks.slice(idx, 1)
       return {
         tasks: newArray,
-      };
-    });
-    console.log("Deleted", id);
+      }
+    })
+    console.log('Deleted', id)
   };
 
   render() {
@@ -57,6 +58,6 @@ export default class App extends React.Component {
           <Footer />
         </section>
       </section>
-    );
+    )
   }
 }

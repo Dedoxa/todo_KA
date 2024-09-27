@@ -1,9 +1,10 @@
-import React from "react";
-import Footer from "./components/Footer/Footer";
-import NewTaskForm from "./components/NewTaskForm/NewTaskForm";
-import TaskList from "./components/TaskList/TaskList";
+import React from 'react'
 
-import "./App.css";
+import Footer from './components/Footer/Footer'
+import NewTaskForm from './components/NewTaskForm/NewTaskForm'
+import TaskList from './components/TaskList/TaskList'
+
+import './App.css'
 
 export default class App extends React.Component {
   startId = 0;
@@ -36,56 +37,51 @@ export default class App extends React.Component {
   // };
 
   state = {
-    tasks: [
-      this.createItem("Some task 1"),
-      this.createItem("Some task 2"),
-      this.createItem("Some task 3"),
-    ],
+    tasks: [this.createItem('Some task 1'), this.createItem('Some task 2'), this.createItem('Some task 3')],
   };
 
   createItem(descriptionText) {
     return {
       descriptionText,
-      createdText: "created ? ago",
+      createdText: 'created ? ago',
       done: false,
       id: this.maxId++,
-    };
+    }
   }
 
   addItem = (text) => {
-    const newItem = this.createItem(text);
+    const newItem = this.createItem(text)
 
     this.setState(({ tasks }) => {
-      const newArray = [...tasks, newItem];
+      const newArray = [...tasks, newItem]
       return {
         tasks: newArray,
-      };
-    });
-  }
+      }
+    })
+  };
 
   deleteItem = (id) => {
     this.setState(({ tasks }) => {
-      const idx = tasks.findIndex((el) => el.id === id);
-      const newArray = tasks.toSpliced(idx, 1);
+      const idx = tasks.findIndex((el) => el.id === id)
+      const newArray = tasks.toSpliced(idx, 1)
       return {
         tasks: newArray,
-      };
-    });
+      }
+    })
   };
 
   onTaskClick = () => {
     this.setState(({ done }) => {
       return {
         done: !done,
-      };
-    });
+      }
+    })
   };
 
   render() {
-
-    const { tasks } = this.state;
-    const doneCount = tasks.filter(el => el.done).length;
-    const tasksCount = tasks.length - doneCount;
+    const { tasks } = this.state
+    const doneCount = tasks.filter((el) => el.done).length
+    const tasksCount = tasks.length - doneCount
 
     return (
       <section className="todoapp">
@@ -95,9 +91,9 @@ export default class App extends React.Component {
         </header>
         <section className="main">
           <TaskList data={this.state.tasks} onDeleted={this.deleteItem} />
-          <Footer tasksSumm={tasksCount}/>
+          <Footer tasksSumm={tasksCount} />
         </section>
       </section>
-    );
+    )
   }
 }

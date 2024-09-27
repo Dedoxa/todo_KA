@@ -1,26 +1,24 @@
-import React from "react";
+import React from 'react'
 
-import "./TasksFilter.css";
+import './TasksFilter.css'
 
 export default class TasksFilter extends React.Component {
   static defaultProps = {
     onShowAll: () => {
-      alert("Footer.TasksFilter.defaultfunction");
+      alert('Footer.TasksFilter.defaultfunction')
     },
     onShowCompleted: () => {
-      alert("Footer.TasksFilter.defaultfunction");
+      alert('Footer.TasksFilter.defaultfunction')
     },
     onShowActive: () => {
-      alert("Footer.TasksFilter.defaultfunction");
+      alert('Footer.TasksFilter.defaultfunction')
     },
   };
 
-  static propTypes = {
-    
-  }
+  static propTypes = {};
 
   render() {
-    const { onShowAll, onShowCompleted, onShowActive } = this.props;
+    const { onShowAll, onShowCompleted, onShowActive } = this.props
     return (
       <ul className="filters">
         <li>
@@ -35,6 +33,6 @@ export default class TasksFilter extends React.Component {
           <button onClick={() => onShowActive()}>Completed</button>
         </li>
       </ul>
-    );
+    )
   }
 }

@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react'
 
-import "./Task.css";
+import './Task.css'
 
 export default class Task extends React.Component {
   state = {
@@ -16,7 +16,7 @@ export default class Task extends React.Component {
       // inputDefaultValue
     } = this.props
 
-      /*AdditionalInput() {
+    /*AdditionalInput() {
         if (inputClass) {
           return (
             <input
@@ -43,6 +43,6 @@ export default class Task extends React.Component {
         </div>
         {/* <AdditionalInput /> */}
       </span>
-    );
+    )
   }
 }

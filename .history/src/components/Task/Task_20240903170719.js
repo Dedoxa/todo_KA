@@ -1,9 +1,8 @@
-import React from "react";
+import React from 'react'
 
-import "./Task.css";
+import './Task.css'
 
-const Task = ({...tasks}) => {
-
+const Task = ({ ...tasks }) => {
   /*
   if liClass
   if Input2
@@ -21,10 +20,10 @@ const Task = ({...tasks}) => {
         <button className="icon icon-destroy"></button>
       </div>
     </li>
-  );
-};
+  )
+}
 
-export default Task;
+export default Task
 
 {
   /*

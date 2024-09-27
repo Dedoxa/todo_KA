@@ -1,35 +1,36 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import "./NewTaskForm.css";
+import './NewTaskForm.css'
 
 export default class NewTaskForm extends React.Component {
-
   static defaultProps = {
-    onItemAdded: () => {alert("NewTaskForm.defaultFunction")}
-  }
+    onItemAdded: () => {
+      alert('NewTaskForm.defaultFunction')
+    },
+  };
 
   static propTypes = {
-    onItemAdded: PropTypes.func
-  }
+    onItemAdded: PropTypes.func,
+  };
 
   state = {
-    descriptionText: "",
+    descriptionText: '',
   };
 
   onInputChange = (e) => {
     this.setState({
       descriptionText: e.target.value,
-    });
+    })
   };
 
   onSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     this.props.onItemAdded(this.state.descriptionText)
     this.setState({
-      descriptionText: "",
+      descriptionText: '',
     })
-  }
+  };
 
   render() {
     return (
@@ -43,6 +44,6 @@ export default class NewTaskForm extends React.Component {
           value={this.state.descriptionText}
         />
       </form>
-    );
+    )
   }
 }

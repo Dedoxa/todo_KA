@@ -1,0 +1,9 @@
+После выполнения данных инструкций и разрешения ошибки, появилась новая: "Parsing error: Cannot find module 'C:\Coding\todo\babel.config.json\babel.config.json'
+Require stack:
+- C:\Coding\todo\node_modules\@babel\core\lib\config\files\configuration.js
+- C:\Coding\todo\node_modules\@babel\core\lib\config\files\index.js
+- C:\Coding\todo\node_modules\@babel\core\lib\index.js
+- C:\Coding\todo\node_modules\@babel\eslint-parser\lib\worker\babel-core.cjs
+- C:\Coding\todo\node_modules\@babel\eslint-parser\lib\worker\handle-message.cjs
+- C:\Coding\todo\node_modules\@babel\eslint-parser\lib\client.cjs
+- C:\Coding\todo\node_modules\@babel\eslint-parser\lib\index.cjs"

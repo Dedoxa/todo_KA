@@ -1,9 +1,10 @@
-import React from "react";
-import Footer from "./components/Footer/Footer";
-import NewTaskForm from "./components/NewTaskForm/NewTaskForm";
-import TaskList from "./components/TaskList/TaskList";
+import React from 'react'
 
-import "./App.css";
+import Footer from './components/Footer/Footer'
+import NewTaskForm from './components/NewTaskForm/NewTaskForm'
+import TaskList from './components/TaskList/TaskList'
+
+import './App.css'
 
 export default class App extends React.Component {
   startId = 0;
@@ -36,76 +37,72 @@ export default class App extends React.Component {
   // };
 
   state = {
-    tasks: [
-      this.createItem("Some task 1"),
-      this.createItem("Some task 2"),
-      this.createItem("Some task 3"),
-    ],
+    tasks: [this.createItem('Some task 1'), this.createItem('Some task 2'), this.createItem('Some task 3')],
   };
 
   createItem(descriptionText) {
     return {
       descriptionText,
-      createdText: "created ? ago",
+      createdText: 'created ? ago',
       done: false,
       id: this.startId++,
-    };
+    }
   }
 
   addItem = (text) => {
-    const newItem = this.createItem(text);
+    const newItem = this.createItem(text)
 
     this.setState(({ tasks }) => {
-      const newArray = [...tasks, newItem];
+      const newArray = [...tasks, newItem]
       return {
         tasks: newArray,
-      };
-    });
+      }
+    })
   };
 
   deleteItem = (id) => {
     this.setState(({ tasks }) => {
-      const idx = tasks.findIndex((el) => el.id === id);
-      const newArray = tasks.toSpliced(idx, 1);
+      const idx = tasks.findIndex((el) => el.id === id)
+      const newArray = tasks.toSpliced(idx, 1)
       return {
         tasks: newArray,
-      };
-    });
+      }
+    })
   };
 
   filterNUpdateTasks = (arr, propName, value) => {
     return arr.filter((el) => el[propName] === value)
-  }
+  };
 
   deleteDoneItems = () => {
     this.setState(({ tasks }) => {
-      const newArray = tasks.filterNUpdateTasks(tasks, "done", false);
+      const newArray = tasks.filterNUpdateTasks(tasks, 'done', false)
       return {
         tasks: newArray,
-      };
-    });
+      }
+    })
   };
 
   switchProp(arr, id, propName) {
-    const idx = arr.findIndex((el) => el.id === id);
-    const oldItem = arr[idx];
-    const newItem = { ...oldItem, [propName]: !oldItem[propName] };
+    const idx = arr.findIndex((el) => el.id === id)
+    const oldItem = arr[idx]
+    const newItem = { ...oldItem, [propName]: !oldItem[propName] }
 
-    return arr.toSpliced(idx, 1, newItem);
+    return arr.toSpliced(idx, 1, newItem)
   }
 
   onTaskClick = (id) => {
     this.setState(({ tasks }) => {
       return {
-        tasks: this.switchProp(tasks, id, "done"),
-      };
-    });
+        tasks: this.switchProp(tasks, id, 'done'),
+      }
+    })
   };
 
   render() {
-    const { tasks } = this.state;
-    const doneCount = tasks.filter((el) => el.done).length;
-    const tasksCount = tasks.length - doneCount;
+    const { tasks } = this.state
+    const doneCount = tasks.filter((el) => el.done).length
+    const tasksCount = tasks.length - doneCount
 
     return (
       <section className="todoapp">
@@ -114,18 +111,10 @@ export default class App extends React.Component {
           <NewTaskForm onItemAdded={this.addItem} />
         </header>
         <section className="main">
-          <TaskList
-            data={tasks}
-            onDeleted={this.deleteItem}
-            onToggleDone={this.onTaskClick}
-          />
-          <Footer
-            data={tasks}
-            tasksSumm={tasksCount}
-            onClearCompleted={this.deleteDoneItems}
-          />
+          <TaskList data={tasks} onDeleted={this.deleteItem} onToggleDone={this.onTaskClick} />
+          <Footer data={tasks} tasksSumm={tasksCount} onClearCompleted={this.deleteDoneItems} />
         </section>
       </section>
-    );
+    )
   }
 }
