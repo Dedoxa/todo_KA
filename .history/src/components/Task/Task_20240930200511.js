@@ -46,20 +46,6 @@ export default class Task extends React.Component {
     }),
   }
 
-  componentDidMount() {
-    this.interval = setInterval(() => {
-      this.setState({
-        timeFromCreation: formatDistanceToNow(this.props.dateOfCreation, {
-          includeSeconds: true,
-        }),
-      })
-    }, 1000)
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.interval)
-  }
-
   onInputChange = (e) => {
     this.setState({
       descriptionText: e.target.value,
@@ -74,7 +60,7 @@ export default class Task extends React.Component {
   }
 
   render() {
-    const { id, descriptionText, onDeleted, edit, done, hidden, onToggleDone, onEdit } = this.props
+    const { id, descriptionText, dateOfCreation, onDeleted, edit, done, hidden, onToggleDone, onEdit } = this.props
 
     let liClassNames = ''
     let divClasses = 'view'

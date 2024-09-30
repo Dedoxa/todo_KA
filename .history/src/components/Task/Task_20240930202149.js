@@ -41,9 +41,7 @@ export default class Task extends React.Component {
 
   state = {
     descriptionText: this.props.descriptionText,
-    timeFromCreation: formatDistanceToNow(this.props.dateOfCreation, {
-      includeSeconds: true,
-    }),
+    timeFromCreation: this.props.dateOfCreation,
   }
 
   componentDidMount() {

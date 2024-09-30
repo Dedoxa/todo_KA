@@ -48,16 +48,8 @@ export default class Task extends React.Component {
 
   componentDidMount() {
     this.interval = setInterval(() => {
-      this.setState({
-        timeFromCreation: formatDistanceToNow(this.props.dateOfCreation, {
-          includeSeconds: true,
-        }),
-      })
-    }, 1000)
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.interval)
+      this.setState({ time: new Date().toLocaleTimeString() });
+    }, 1000);
   }
 
   onInputChange = (e) => {

@@ -41,23 +41,7 @@ export default class Task extends React.Component {
 
   state = {
     descriptionText: this.props.descriptionText,
-    timeFromCreation: formatDistanceToNow(this.props.dateOfCreation, {
-      includeSeconds: true,
-    }),
-  }
-
-  componentDidMount() {
-    this.interval = setInterval(() => {
-      this.setState({
-        timeFromCreation: formatDistanceToNow(this.props.dateOfCreation, {
-          includeSeconds: true,
-        }),
-      })
-    }, 1000)
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.interval)
+    dateOfCreation: this.props.dateOfCreation,
   }
 
   onInputChange = (e) => {
@@ -107,7 +91,9 @@ export default class Task extends React.Component {
             <span className="description" onClick={onToggleDone}>
               {descriptionText}
             </span>
-            <span className="created">{`created ${this.state.timeFromCreation} ago`}</span>
+            <span className="created">{`created ${formatDistanceToNow(this.state.dateOfCreation, {
+              includeSeconds: true,
+            })} ago`}</span>
           </label>
           <button className="icon icon-edit" onClick={onEdit}></button>
           <button className="icon icon-destroy" onClick={onDeleted}></button>
