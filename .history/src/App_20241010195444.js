@@ -20,7 +20,7 @@ export default class App extends React.Component {
   componentDidMount() {
     const savedTasks = localStorage.getItem('tasks')
     if (savedTasks) {
-      const tasks = JSON.parse(savedTasks).map((task) => ({ ...task, edit: false }))
+      const tasks = JSON.parse(savedTasks)
       const maxId = tasks.reduce((max, task) => Math.max(max, task.id), -1)
       this.startId = maxId + 1
       this.setState({ tasks })
@@ -52,7 +52,7 @@ export default class App extends React.Component {
     })
   }
 
-  onDeleted = (id) => {
+  deleteItem = (id) => {
     this.setState(({ tasks }) => {
       const idx = tasks.findIndex((el) => el.id === id)
       const newArray = tasks.toSpliced(idx, 1)
@@ -67,7 +67,7 @@ export default class App extends React.Component {
     return arr.filter((el) => el[propName] === value)
   }
 
-  onClearCompleted = () => {
+  deleteDoneItems = () => {
     this.setState(({ tasks }) => {
       const newArray = this.filterTasks(tasks, 'done', false)
       return {
@@ -84,16 +84,15 @@ export default class App extends React.Component {
     return arr.toSpliced(idx, 1, newItem)
   }
 
-  onToggleDone = (id) => {
+  onTaskClick = (id) => {
     this.setState(({ tasks }) => {
-      localStorage.setItem('tasks', JSON.stringify(this.switchProp(tasks, id, 'done')))
       return {
         tasks: this.switchProp(tasks, id, 'done'),
       }
     })
   }
 
-  onEdit = (id) => {
+  onEditClick = (id) => {
     this.setState(({ tasks }) => {
       return {
         tasks: this.switchProp(tasks, id, 'edit'),
@@ -101,20 +100,20 @@ export default class App extends React.Component {
     })
   }
 
-  onRewrite = (text, id) => {
+  changeTaskText = (text, id, newTime) => {
     this.setState(({ tasks }) => {
       const idx = tasks.findIndex((el) => el.id === id)
       const oldItem = tasks[idx]
-      const newItem = { ...oldItem, descriptionText: text }
+      const newItem = { ...oldItem, descriptionText: text, time: newTime } // Обновляем время
       const newArray = tasks.toSpliced(idx, 1, newItem)
-      localStorage.setItem('tasks', JSON.stringify(newArray))
+      localStorage.setItem('tasks', JSON.stringify(newArray)) // Обновляем localStorage
       return {
         tasks: this.switchProp(newArray, id, 'edit'),
       }
     })
   }
 
-  onShowAll = () => {
+  showAllTasks = () => {
     this.setState(({ tasks }) => {
       const newFooterFilter = 'All'
       const newArray = JSON.parse(JSON.stringify(tasks))
@@ -126,7 +125,7 @@ export default class App extends React.Component {
     })
   }
 
-  onShowCompleted = () => {
+  showCompletedTasks = () => {
     this.setState(({ tasks }) => {
       const newFooterFilter = 'Completed'
       const newArray = JSON.parse(JSON.stringify(tasks))
@@ -141,7 +140,7 @@ export default class App extends React.Component {
     })
   }
 
-  onShowActive = () => {
+  showActiveTasks = () => {
     this.setState(({ tasks }) => {
       const newFooterFilter = 'Active'
       const newArray = JSON.parse(JSON.stringify(tasks))
@@ -175,18 +174,18 @@ export default class App extends React.Component {
         <section className="main">
           <TaskList
             data={tasks}
-            onDeleted={this.onDeleted}
-            onToggleDone={this.onToggleDone}
-            onEdit={this.onEdit}
-            onRewrite={this.onRewrite}
+            onDeleted={this.deleteItem}
+            onToggleDone={this.onTaskClick}
+            onEdit={this.onEditClick}
+            onRewrite={this.changeTaskText}
           />
           <Footer
             tasksSumm={tasksCount}
-            onClearCompleted={this.onClearCompleted}
+            onClearCompleted={this.deleteDoneItems}
             footerFilter={footerFilter}
-            onShowAll={this.onShowAll}
-            onShowCompleted={this.onShowCompleted}
-            onShowActive={this.onShowActive}
+            onShowAll={this.showAllTasks}
+            onShowCompleted={this.showCompletedTasks}
+            onShowActive={this.showActiveTasks}
           />
         </section>
       </section>

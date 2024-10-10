@@ -76,25 +76,11 @@ export default class Task extends React.Component {
     document.removeEventListener('click', this.handleClickOutside)
   }
 
-  getPreviousDescriptionText = () => {
-    const parsedStorage = JSON.parse(localStorage.getItem('tasks'))
-    const prevDescriptionText = parsedStorage[this.props.id - 1].descriptionText
-    this.setState({
-      descriptionText: prevDescriptionText,
-    })
-  }
-
   handleKeyDown = (e) => {
     if (e.key === 'Escape' && this.props.edit) {
-      this.getPreviousDescriptionText()
       this.props.onEdit()
-    }
-  }
-
-  handleClickOutside = (e) => {
-    if (this.props.edit && !this.node.contains(e.target)) {
-      this.getPreviousDescriptionText()
-      this.props.onEdit()
+      const parsedStorage = JSON.parse(localStorage.getItem('tasks'))
+      e.target.value = parsedStorage[this.props.id - 1].descriptionText
     }
   }
 

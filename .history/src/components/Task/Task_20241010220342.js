@@ -46,7 +46,6 @@ export default class Task extends React.Component {
     }),
     time: `${String(this.props.minutes).padStart(2, '0')}:${String(this.props.seconds).padStart(2, '0')}`,
     isRunning: false,
-    hasStopped: false,
     timerInterval: null,
     isCountingUp: !this.props.minutes && !this.props.seconds,
   }
@@ -69,33 +68,11 @@ export default class Task extends React.Component {
   }
 
   componentWillUnmount() {
-    localStorage.removeItem(`task-${this.props.id}-time`, this.state.time)
+    localStorage.setItem(`task-${this.props.id}-time`, this.state.time)
     clearInterval(this.interval)
 
     document.removeEventListener('keydown', this.handleKeyDown)
     document.removeEventListener('click', this.handleClickOutside)
-  }
-
-  getPreviousDescriptionText = () => {
-    const parsedStorage = JSON.parse(localStorage.getItem('tasks'))
-    const prevDescriptionText = parsedStorage[this.props.id - 1].descriptionText
-    this.setState({
-      descriptionText: prevDescriptionText,
-    })
-  }
-
-  handleKeyDown = (e) => {
-    if (e.key === 'Escape' && this.props.edit) {
-      this.getPreviousDescriptionText()
-      this.props.onEdit()
-    }
-  }
-
-  handleClickOutside = (e) => {
-    if (this.props.edit && !this.node.contains(e.target)) {
-      this.getPreviousDescriptionText()
-      this.props.onEdit()
-    }
   }
 
   onInputChange = (e) => {
@@ -112,7 +89,7 @@ export default class Task extends React.Component {
   }
 
   startTimer = () => {
-    if (!this.state.isRunning && !this.state.hasStopped) {
+    if (!this.state.isRunning) {
       this.setState({ isRunning: true })
       const [minutes, seconds] = this.state.time.split(':').map(Number)
       let totalSeconds = minutes * 60 + seconds
@@ -152,7 +129,6 @@ export default class Task extends React.Component {
       {
         time: newTime,
         isRunning: false,
-        hasStopped: true,
       },
       () => {
         localStorage.setItem(`task-${this.props.id}-time`, newTime)
@@ -195,9 +171,12 @@ export default class Task extends React.Component {
     const { id, descriptionText, onDeleted, edit, done, hidden } = this.props
     const { time } = this.state
 
+    let liClassNames = ''
     let divClasses = 'view'
     let editFormClasses = ''
     let checkBoxState = ''
+
+    edit ? (liClassNames = 'editing') : (liClassNames = '')
 
     if (done) {
       divClasses += ' completed'
@@ -216,7 +195,7 @@ export default class Task extends React.Component {
     }
 
     return (
-      <li key={id} className={edit ? 'editing' : ''} ref={(node) => (this.node = node)}>
+      <li key={id} className={liClassNames}>
         <div className={divClasses}>
           <input
             className="toggle"
