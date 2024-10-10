@@ -39,23 +39,12 @@ export default class NewTaskForm extends React.Component {
 
   onSubmit = (e) => {
     e.preventDefault()
-    const { descriptionText, minutes, seconds } = this.state
-    if (descriptionText.trim() !== '') {
-      this.props.onItemAdded(descriptionText, minutes, seconds)
+    if (this.state.descriptionText.trim() !== '') {
+      this.props.onItemAdded(this.state.descriptionText)
       this.setState({
         descriptionText: '',
-        minutes: '',
-        seconds: '',
       })
     }
-  }
-
-  onMinutesChange = (e) => {
-    this.setState({ minutes: e.target.value })
-  }
-
-  onSecondsChange = (e) => {
-    this.setState({ seconds: e.target.value })
   }
 
   render() {
@@ -69,20 +58,8 @@ export default class NewTaskForm extends React.Component {
           placeholder="What needs to be done?"
           value={this.state.descriptionText}
         />
-        <input
-          type="number"
-          className="new-todo-form__timer"
-          placeholder="Min"
-          value={this.state.minutes}
-          onChange={this.onMinutesChange}
-        />
-        <input
-          type="number"
-          className="new-todo-form__timer"
-          placeholder="Sec"
-          value={this.state.seconds}
-          onChange={this.onSecondsChange}
-        />
+        <input type="number" className="new-todo-form__timer" placeholder="Min" onKeyDown={this.onKeyDown} />
+        <input type="number" className="new-todo-form__timer" placeholder="Sec" onKeyDown={this.onKeyDown} />
       </form>
     )
   }

@@ -77,33 +77,34 @@ export default class Task extends React.Component {
     }
   }
 
-  startTimer = () => {
-    if (!this.state.isRunning) {
-      this.setState({ isRunning: true })
-      const [minutes, seconds] = this.state.time.split(':').map(Number)
-
-      let totalSeconds = minutes * 60 + seconds
-
-      this.interval = setInterval(() => {
-        if (this.state.isCountingUp) {
-          totalSeconds += 1
+  startTimer() {
+    this.interval = setInterval(() => {
+      this.setState((prevState) => {
+        const { minutes, seconds } = prevState.time; // Получаем текущее значение времени
+        let newMinutes = minutes;
+        let newSeconds = seconds;
+  
+        if (newSeconds === 0) {
+          if (newMinutes === 0) {
+            clearInterval(this.interval);
+            return { time: { minutes: 0, seconds: 0 } }; // Останавливаем таймер
+          }
+          newMinutes -= 1;
+          newSeconds = 59;
         } else {
-          totalSeconds -= 1
+          newSeconds -= 1;
         }
-
-        const min = Math.floor(totalSeconds / 60)
-        const sec = totalSeconds % 60
-
-        if (totalSeconds >= 0 || this.state.isCountingUp) {
-          this.setState({
-            time: `${String(min).padStart(2, '0')}:${String(sec).padStart(2, '0')}`,
-          })
-        } else {
-          clearInterval(this.interval)
-          this.setState({ isRunning: false })
-        }
-      }, 1000)
-    }
+  
+        const newTime = { minutes: newMinutes, seconds: newSeconds };
+        // Сохраняем текущее состояние в localStorage
+        const updatedTasks = this.props.data.map(task =>
+          task.id === this.props.id ? { ...task, timerValue: newTime } : task
+        );
+        localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+  
+        return { time: newTime }; // Обновляем состояние
+      });
+    }, 1000);
   }
 
   onPlayClick = () => {

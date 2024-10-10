@@ -85,21 +85,17 @@ export default class Task extends React.Component {
       let totalSeconds = minutes * 60 + seconds
 
       this.interval = setInterval(() => {
-        if (this.state.isCountingUp) {
-          totalSeconds += 1
-        } else {
-          totalSeconds -= 1
-        }
+        totalSeconds -= 1
 
         const min = Math.floor(totalSeconds / 60)
         const sec = totalSeconds % 60
 
-        if (totalSeconds >= 0 || this.state.isCountingUp) {
+        if (totalSeconds >= 0) {
           this.setState({
-            time: `${String(min).padStart(2, '0')}:${String(sec).padStart(2, '0')}`,
+            time: `${String(min).padStart(2, '0')}:${String(sec).padStart(2, '0')}`, // Обновляем отображаемое время
           })
         } else {
-          clearInterval(this.interval)
+          clearInterval(this.interval) // Останавливаем таймер, когда он достигает 00:00
           this.setState({ isRunning: false })
         }
       }, 1000)

@@ -18,12 +18,15 @@ export default class App extends React.Component {
   componentDidMount() {
     const savedTasks = localStorage.getItem('tasks')
     if (savedTasks) {
-      const tasks = JSON.parse(savedTasks)
-      const maxId = tasks.reduce((max, task) => Math.max(max, task.id), -1)
-      this.startId = maxId + 1
-      this.setState({ tasks })
+      const tasks = JSON.parse(savedTasks);
+    // Устанавливаем startId на максимальное значение id из загруженных задач
+    const maxId = tasks.reduce((max, task) => Math.max(max, task.id), -1);
+    this.startId = maxId + 1; // Увеличиваем на 1 для следующего добавления
+    this.setState({ tasks });
     }
   }
+
+  startId = 0
 
   createItem(descriptionText, minutes = 0, seconds = 0) {
     return {

@@ -18,12 +18,21 @@ export default class App extends React.Component {
   componentDidMount() {
     const savedTasks = localStorage.getItem('tasks')
     if (savedTasks) {
-      const tasks = JSON.parse(savedTasks)
-      const maxId = tasks.reduce((max, task) => Math.max(max, task.id), -1)
-      this.startId = maxId + 1
-      this.setState({ tasks })
+      this.setState({
+        tasks: JSON.parse(savedTasks),
+      })
     }
   }
+
+  startId = (() => {
+    const savedTasks = localStorage.getItem('tasks')
+    if (savedTasks) {
+      console.log(`here are ${savedTasks.length} tasks`)
+      return savedTasks.length
+    }
+    console.log('here are no tasks')
+    return 0
+  })()
 
   createItem(descriptionText, minutes = 0, seconds = 0) {
     return {

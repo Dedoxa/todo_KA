@@ -44,10 +44,13 @@ export default class Task extends React.Component {
     timeFromCreation: formatDistanceToNow(this.props.dateOfCreation, {
       includeSeconds: true,
     }),
-    time: `${String(this.props.minutes).padStart(2, '0')}:${String(this.props.seconds).padStart(2, '0')}`,
     isRunning: false,
     timerInterval: null,
     isCountingUp: !this.props.minutes && !this.props.seconds,
+    time: {
+      minutes: this.props.timerValue.minutes,
+      seconds: this.props.timerValue.seconds,
+    },
   }
 
   componentDidMount() {

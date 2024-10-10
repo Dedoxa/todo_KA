@@ -79,32 +79,32 @@ export default class Task extends React.Component {
 
   startTimer = () => {
     if (!this.state.isRunning) {
-      this.setState({ isRunning: true })
-      const [minutes, seconds] = this.state.time.split(':').map(Number)
-
-      let totalSeconds = minutes * 60 + seconds
-
+      this.setState({ isRunning: true });
+      const [minutes, seconds] = this.state.time.split(':').map(Number); // Получаем текущее время в минутах и секундах
+  
+      let totalSeconds = minutes * 60 + seconds; // Преобразуем в общее количество секунд
+  
       this.interval = setInterval(() => {
         if (this.state.isCountingUp) {
-          totalSeconds += 1
+          totalSeconds += 1; // !!! Если считаем вверх, увеличиваем количество секунд
         } else {
-          totalSeconds -= 1
+          totalSeconds -= 1; // Если отсчитываем вниз, уменьшаем количество секунд
         }
-
-        const min = Math.floor(totalSeconds / 60)
-        const sec = totalSeconds % 60
-
-        if (totalSeconds >= 0 || this.state.isCountingUp) {
+  
+        const min = Math.floor(totalSeconds / 60); // Пересчитываем минуты
+        const sec = totalSeconds % 60; // Пересчитываем секунды
+  
+        if (totalSeconds >= 0 || this.state.isCountingUp) {  // !!! Если таймер считает вверх, никогда не останавливаемся
           this.setState({
-            time: `${String(min).padStart(2, '0')}:${String(sec).padStart(2, '0')}`,
-          })
+            time: `${String(min).padStart(2, '0')}:${String(sec).padStart(2, '0')}`, // Обновляем отображаемое время
+          });
         } else {
-          clearInterval(this.interval)
-          this.setState({ isRunning: false })
+          clearInterval(this.interval); // Останавливаем таймер, когда он достигает 00:00 (если считаем вниз)
+          this.setState({ isRunning: false });
         }
-      }, 1000)
+      }, 1000);
     }
-  }
+  };
 
   onPlayClick = () => {
     this.startTimer()

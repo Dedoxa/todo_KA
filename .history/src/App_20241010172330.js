@@ -10,19 +10,11 @@ export default class App extends React.Component {
   static defaultProps = {}
   static propTypes = {}
 
+  startId = 0
+
   state = {
     footerFilter: 'All',
     tasks: [],
-  }
-
-  componentDidMount() {
-    const savedTasks = localStorage.getItem('tasks')
-    if (savedTasks) {
-      const tasks = JSON.parse(savedTasks)
-      const maxId = tasks.reduce((max, task) => Math.max(max, task.id), -1)
-      this.startId = maxId + 1
-      this.setState({ tasks })
-    }
   }
 
   createItem(descriptionText, minutes = 0, seconds = 0) {
@@ -104,7 +96,6 @@ export default class App extends React.Component {
       const oldItem = tasks[idx]
       const newItem = { ...oldItem, descriptionText: text }
       const newArray = tasks.toSpliced(idx, 1, newItem)
-      localStorage.setItem('tasks', JSON.stringify(newArray))
       return {
         tasks: this.switchProp(newArray, id, 'edit'),
       }
@@ -151,6 +142,15 @@ export default class App extends React.Component {
         tasks: newArray,
       }
     })
+  }
+
+  componentDidMount() {
+    const savedTasks = localStorage.getItem('tasks')
+    if (savedTasks) {
+      this.setState({
+        tasks: JSON.parse(savedTasks),
+      })
+    }
   }
 
   render() {

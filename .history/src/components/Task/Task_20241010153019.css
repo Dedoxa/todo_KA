@@ -64,11 +64,9 @@
   padding: 15px 85px 15px 60px;
 }
 
-.todo-list li label .created,
-.timerSection {
+.todo-list li label .created, .timerSection {
   font-size: 13px;
   color: gray;
-  text-align: center;
 }
 
 .todo-list li label .description {
@@ -93,7 +91,7 @@
   height: 40px;
   font-size: 34px;
   color: #cc9a9a;
-  margin: auto 0;
+  margin: auto 0 11px;
   transition: color 0.2s ease-out;
   cursor: pointer;
 }
@@ -157,30 +155,24 @@
 
 .todo-list li .icon-pause,
 .todo-list li .icon-play {
-  position: relative;
-  font-size: 18px;
-  width: 18px;
-  height: 18px;
-  margin: auto 0;
-}
-
-.todo-list li .icon-pause {
-  margin-right: 15px;
+	font-size: 18px;
+	width: 18px;
+	height: 18px;
 }
 
 .todo-list li .icon-play {
-  margin-right: 5px;
-  font-size: 15px;
+	font-size: 15px;
 }
 
 .icon-pause:after {
-  content: '⏸';
+	content: '⏸';
 }
 
 .icon-play:after {
-  content: '▶';
+	content: '▶';
 }
 
 .timerSection {
   width: 100px;
+  display: flex;
 }

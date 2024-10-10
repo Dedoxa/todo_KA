@@ -15,6 +15,8 @@ export default class App extends React.Component {
     tasks: [],
   }
 
+  startId = 0
+
   componentDidMount() {
     const savedTasks = localStorage.getItem('tasks')
     if (savedTasks) {
@@ -35,11 +37,12 @@ export default class App extends React.Component {
       done: false,
       hidden: false,
       id: this.startId++,
+      timerValue,
     }
   }
 
-  addItem = (text, minutes, seconds) => {
-    const newItem = this.createItem(text, minutes, seconds)
+  addItem = (text) => {
+    const newItem = this.createItem(text)
 
     this.setState(({ tasks }) => {
       const newArray = [...tasks, newItem]

@@ -15,15 +15,14 @@ export default class App extends React.Component {
     tasks: [],
   }
 
-  componentDidMount() {
-    const savedTasks = localStorage.getItem('tasks')
-    if (savedTasks) {
-      const tasks = JSON.parse(savedTasks)
-      const maxId = tasks.reduce((max, task) => Math.max(max, task.id), -1)
-      this.startId = maxId + 1
-      this.setState({ tasks })
+  startId = (() => {
+    if (this.state.tasks.length !== []) {
+      console.log(`here are ${this.state.tasks.length} tasks`)
+      return this.state.tasks.length
     }
-  }
+    console.log('here are no tasks')
+    return 0
+  })()
 
   createItem(descriptionText, minutes = 0, seconds = 0) {
     return {
@@ -151,6 +150,15 @@ export default class App extends React.Component {
         tasks: newArray,
       }
     })
+  }
+
+  componentDidMount() {
+    const savedTasks = localStorage.getItem('tasks')
+    if (savedTasks) {
+      this.setState({
+        tasks: JSON.parse(savedTasks),
+      })
+    }
   }
 
   render() {

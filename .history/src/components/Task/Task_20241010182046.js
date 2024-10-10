@@ -44,20 +44,23 @@ export default class Task extends React.Component {
     timeFromCreation: formatDistanceToNow(this.props.dateOfCreation, {
       includeSeconds: true,
     }),
-    time: `${String(this.props.minutes).padStart(2, '0')}:${String(this.props.seconds).padStart(2, '0')}`,
     isRunning: false,
     timerInterval: null,
     isCountingUp: !this.props.minutes && !this.props.seconds,
+    time: {
+      minutes: this.props.timerValue.minutes,
+      seconds: this.props.timerValue.seconds,
+    },
   }
 
   componentDidMount() {
-    this.interval = setInterval(() => {
-      this.setState({
-        timeFromCreation: formatDistanceToNow(this.props.dateOfCreation, {
-          includeSeconds: true,
-        }),
-      })
-    }, 1000)
+    const savedTasks = localStorage.getItem('tasks')
+    if (savedTasks) {
+      const tasks = JSON.parse(savedTasks)
+      const maxId = tasks.reduce((max, task) => Math.max(max, task.id), -1)
+      this.startId = maxId + 1
+      this.setState({ tasks })
+    }
   }
 
   componentWillUnmount() {
@@ -77,33 +80,33 @@ export default class Task extends React.Component {
     }
   }
 
-  startTimer = () => {
-    if (!this.state.isRunning) {
-      this.setState({ isRunning: true })
-      const [minutes, seconds] = this.state.time.split(':').map(Number)
+  startTimer() {
+    this.interval = setInterval(() => {
+      this.setState((prevState) => {
+        const { minutes, seconds } = prevState.time
+        let newMinutes = minutes
+        let newSeconds = seconds
 
-      let totalSeconds = minutes * 60 + seconds
-
-      this.interval = setInterval(() => {
-        if (this.state.isCountingUp) {
-          totalSeconds += 1
+        if (newSeconds === 0) {
+          if (newMinutes === 0) {
+            clearInterval(this.interval)
+            return { time: { minutes: 0, seconds: 0 } }
+          }
+          newMinutes -= 1
+          newSeconds = 59
         } else {
-          totalSeconds -= 1
+          newSeconds -= 1
         }
 
-        const min = Math.floor(totalSeconds / 60)
-        const sec = totalSeconds % 60
+        const newTime = { minutes: newMinutes, seconds: newSeconds }
+        const updatedTasks = this.props.data.map((task) =>
+          task.id === this.props.id ? { ...task, timerValue: newTime } : task
+        )
+        localStorage.setItem('tasks', JSON.stringify(updatedTasks))
 
-        if (totalSeconds >= 0 || this.state.isCountingUp) {
-          this.setState({
-            time: `${String(min).padStart(2, '0')}:${String(sec).padStart(2, '0')}`,
-          })
-        } else {
-          clearInterval(this.interval)
-          this.setState({ isRunning: false })
-        }
-      }, 1000)
-    }
+        return { time: newTime }
+      })
+    }, 1000)
   }
 
   onPlayClick = () => {
@@ -123,7 +126,7 @@ export default class Task extends React.Component {
 
   render() {
     const { id, descriptionText, onDeleted, edit, done, hidden, onToggleDone, onEdit } = this.props
-    const { time } = this.state // Достаём текущее время из состояния
+    const { time } = this.state
 
     let liClassNames = ''
     let divClasses = 'view'
@@ -159,7 +162,7 @@ export default class Task extends React.Component {
             <span className="timerSection">
               <button className="icon icon-play" onClick={this.onPlayClick}></button>
               <button className="icon icon-pause" onClick={this.onPauseClick}></button>
-              <span className="time">{time}</span>
+              <span className="time">{`${this.state.time.minutes}:${this.state.time.seconds.toString().padStart(2, '0')}`}</span>
             </span>
             <span className="created">{`created ${this.state.timeFromCreation} ago`}</span>
           </label>

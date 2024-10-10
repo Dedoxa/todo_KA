@@ -44,10 +44,8 @@ export default class Task extends React.Component {
     timeFromCreation: formatDistanceToNow(this.props.dateOfCreation, {
       includeSeconds: true,
     }),
-    time: `${String(this.props.minutes).padStart(2, '0')}:${String(this.props.seconds).padStart(2, '0')}`,
-    isRunning: false,
+    time: '00:00',
     timerInterval: null,
-    isCountingUp: !this.props.minutes && !this.props.seconds,
   }
 
   componentDidMount() {
@@ -78,52 +76,29 @@ export default class Task extends React.Component {
   }
 
   startTimer = () => {
-    if (!this.state.isRunning) {
-      this.setState({ isRunning: true })
-      const [minutes, seconds] = this.state.time.split(':').map(Number)
-
-      let totalSeconds = minutes * 60 + seconds
-
-      this.interval = setInterval(() => {
-        if (this.state.isCountingUp) {
-          totalSeconds += 1
-        } else {
-          totalSeconds -= 1
-        }
-
-        const min = Math.floor(totalSeconds / 60)
-        const sec = totalSeconds % 60
-
-        if (totalSeconds >= 0 || this.state.isCountingUp) {
-          this.setState({
-            time: `${String(min).padStart(2, '0')}:${String(sec).padStart(2, '0')}`,
-          })
-        } else {
-          clearInterval(this.interval)
-          this.setState({ isRunning: false })
-        }
-      }, 1000)
-    }
-  }
-
-  onPlayClick = () => {
-    this.startTimer()
+    if (this.state.timerInterval) return; // Если таймер уже идёт, ничего не делаем
+  
+    const startTime = Date.now(); // Время начала отсчёта
+  
+    this.setState({
+      timerInterval: setInterval(() => {
+        const currentTime = Date.now();
+        const elapsedTime = Math.floor((currentTime - startTime) / 1000);
+        const minutes = String(Math.floor(elapsedTime / 60)).padStart(2, '0');
+        const seconds = String(elapsedTime % 60).padStart(2, '0');
+  
+        this.setState({ time: `${minutes}:${seconds}` });
+      }, 1000),
+    });
   }
 
   pauseTimer = () => {
-    if (this.state.isRunning) {
-      clearInterval(this.interval)
-      this.setState({ isRunning: false })
-    }
-  }
-
-  onPauseClick = () => {
-    this.pauseTimer()
+    clearInterval(this.state.timerInterval); // Останавливаем таймер
+    this.setState({ timerInterval: null }); // Сбрасываем ID интервала
   }
 
   render() {
     const { id, descriptionText, onDeleted, edit, done, hidden, onToggleDone, onEdit } = this.props
-    const { time } = this.state // Достаём текущее время из состояния
 
     let liClassNames = ''
     let divClasses = 'view'
@@ -157,9 +132,9 @@ export default class Task extends React.Component {
               {descriptionText}
             </span>
             <span className="timerSection">
-              <button className="icon icon-play" onClick={this.onPlayClick}></button>
-              <button className="icon icon-pause" onClick={this.onPauseClick}></button>
-              <span className="time">{time}</span>
+              <button className="icon icon-play" onClick={this.startTimer}></button>
+              <button className="icon icon-pause" onClick={this.pauseTimer}></button>
+              <span className="time">{this.state.time}</span>
             </span>
             <span className="created">{`created ${this.state.timeFromCreation} ago`}</span>
           </label>
@@ -167,7 +142,15 @@ export default class Task extends React.Component {
           <button className="icon icon-destroy" onClick={onDeleted}></button>
         </div>
         <form onSubmit={this.onSubmit} className={editFormClasses}>
-          <input type="text" className="edit" value={this.state.descriptionText} onChange={this.onInputChange}></input>
+          <input
+            type="text"
+            className="edit"
+            value={this.state.descriptionText}
+            onChange={this.onInputChange}
+            onBlur={() => {
+              console.log('LOG')
+            }}
+          ></input>
         </form>
       </li>
     )

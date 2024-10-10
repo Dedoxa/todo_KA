@@ -47,7 +47,6 @@ export default class Task extends React.Component {
     time: `${String(this.props.minutes).padStart(2, '0')}:${String(this.props.seconds).padStart(2, '0')}`,
     isRunning: false,
     timerInterval: null,
-    isCountingUp: !this.props.minutes && !this.props.seconds,
   }
 
   componentDidMount() {
@@ -85,21 +84,17 @@ export default class Task extends React.Component {
       let totalSeconds = minutes * 60 + seconds
 
       this.interval = setInterval(() => {
-        if (this.state.isCountingUp) {
-          totalSeconds += 1
-        } else {
-          totalSeconds -= 1
-        }
+        totalSeconds -= 1
 
         const min = Math.floor(totalSeconds / 60)
         const sec = totalSeconds % 60
 
-        if (totalSeconds >= 0 || this.state.isCountingUp) {
+        if (totalSeconds >= 0) {
           this.setState({
-            time: `${String(min).padStart(2, '0')}:${String(sec).padStart(2, '0')}`,
+            time: `${String(min).padStart(2, '0')}:${String(sec).padStart(2, '0')}`, // Обновляем отображаемое время
           })
         } else {
-          clearInterval(this.interval)
+          clearInterval(this.interval) // Останавливаем таймер, когда он достигает 00:00
           this.setState({ isRunning: false })
         }
       }, 1000)
@@ -112,8 +107,8 @@ export default class Task extends React.Component {
 
   pauseTimer = () => {
     if (this.state.isRunning) {
-      clearInterval(this.interval)
-      this.setState({ isRunning: false })
+      clearInterval(this.interval);
+      this.setState({ isRunning: false });
     }
   }
 
@@ -122,32 +117,32 @@ export default class Task extends React.Component {
   }
 
   render() {
-    const { id, descriptionText, onDeleted, edit, done, hidden, onToggleDone, onEdit } = this.props
-    const { time } = this.state // Достаём текущее время из состояния
-
-    let liClassNames = ''
-    let divClasses = 'view'
-    let editFormClasses = ''
-    let checkBoxState = ''
-
-    edit ? (liClassNames = 'editing') : (liClassNames = '')
-
+    const { id, descriptionText, onDeleted, edit, done, hidden, onToggleDone, onEdit } = this.props;
+    const { time } = this.state; // Достаём текущее время из состояния
+  
+    let liClassNames = '';
+    let divClasses = 'view';
+    let editFormClasses = '';
+    let checkBoxState = '';
+  
+    edit ? (liClassNames = 'editing') : (liClassNames = '');
+  
     if (done) {
-      divClasses += ' completed'
-      checkBoxState = true
+      divClasses += ' completed';
+      checkBoxState = true;
     } else {
-      divClasses.replace(' completed', '')
-      checkBoxState = false
+      divClasses.replace(' completed', '');
+      checkBoxState = false;
     }
-
+  
     if (hidden) {
-      divClasses += ' hidden'
-      editFormClasses += ' hidden'
+      divClasses += ' hidden';
+      editFormClasses += ' hidden';
     } else {
-      divClasses.replace(' hidden', '')
-      editFormClasses.replace(' hidden', '')
+      divClasses.replace(' hidden', '');
+      editFormClasses.replace(' hidden', '');
     }
-
+  
     return (
       <li key={id} className={liClassNames}>
         <div className={divClasses}>
@@ -167,9 +162,14 @@ export default class Task extends React.Component {
           <button className="icon icon-destroy" onClick={onDeleted}></button>
         </div>
         <form onSubmit={this.onSubmit} className={editFormClasses}>
-          <input type="text" className="edit" value={this.state.descriptionText} onChange={this.onInputChange}></input>
+          <input
+            type="text"
+            className="edit"
+            value={this.state.descriptionText}
+            onChange={this.onInputChange}
+          ></input>
         </form>
       </li>
-    )
+    );
   }
 }

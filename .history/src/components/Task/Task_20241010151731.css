@@ -64,11 +64,9 @@
   padding: 15px 85px 15px 60px;
 }
 
-.todo-list li label .created,
-.timerSection {
+.todo-list li label .created {
   font-size: 13px;
   color: gray;
-  text-align: center;
 }
 
 .todo-list li label .description {
@@ -93,7 +91,7 @@
   height: 40px;
   font-size: 34px;
   color: #cc9a9a;
-  margin: auto 0;
+  margin: auto 0 11px;
   transition: color 0.2s ease-out;
   cursor: pointer;
 }
@@ -140,47 +138,66 @@
   text-decoration: line-through;
 }
 
-/* .todo-list li .icon-destroy {
+.todo-list li .icon {
+	width: 30px;
+	height: 40px;
+	font-size: 34px;
+	color: #cc9a9a;
+	margin: auto 0;
+	transition: color 0.2s ease-out;
+	cursor: pointer;
+}
+
+.todo-list li .icon:hover {
+	color: #af5b5e;
+}
+
+.todo-list li .icon-destroy {
 	position: absolute;
 	top: 0;
 	bottom: -3px;
 	right: 10px;
-} */
+}
 
-/* .todo-list li .icon-edit {
+.todo-list li .icon-destroy:after {
+	content: '×';
+}
+
+.todo-list li .icon-edit {
 	position: absolute;
 	top: 0;
 	bottom: -3px;
 	font-size: 19px;
 	right: 45px;
-} */
+}
+
+.todo-list li .icon-edit:after {
+	content: '✎';
+}
 
 .todo-list li .icon-pause,
 .todo-list li .icon-play {
-  position: relative;
-  font-size: 18px;
-  width: 18px;
-  height: 18px;
-  margin: auto 0;
-}
-
-.todo-list li .icon-pause {
-  margin-right: 15px;
+	font-size: 18px;
+	width: 18px;
+	height: 18px;
 }
 
 .todo-list li .icon-play {
-  margin-right: 5px;
-  font-size: 15px;
+	font-size: 15px;
 }
 
 .icon-pause:after {
-  content: '⏸';
+	content: '⏸';
 }
 
 .icon-play:after {
-  content: '▶';
+	content: '▶';
 }
 
-.timerSection {
-  width: 100px;
+.timerSector {
+  font-size: 0,5em;
+  display: block;
+  flex-direction: row;
+  gap: 5px;
+  color: grey;
 }
