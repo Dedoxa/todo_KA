@@ -7,15 +7,10 @@ import TaskList from './components/TaskList/TaskList.js'
 import './App.css'
 
 export default class App extends React.Component {
-  static defaultProps = {}
-  static propTypes = {}
-
   state = {
     footerFilter: 'All',
     tasks: [],
   }
-
-  startId = 0
 
   componentDidMount() {
     const savedTasks = localStorage.getItem('tasks')
@@ -24,6 +19,8 @@ export default class App extends React.Component {
       const maxId = tasks.reduce((max, task) => Math.max(max, task.id), -1)
       this.startId = maxId + 1
       this.setState({ tasks })
+    } else {
+      this.startId = 0 // Инициализируем startId, если не существует сохраненных задач
     }
   }
 
@@ -43,20 +40,26 @@ export default class App extends React.Component {
   addItem = (text, minutes, seconds) => {
     const newItem = this.createItem(text, minutes, seconds)
 
-    this.setState(({ tasks }) => {
-      const newArray = [...tasks, newItem]
-      localStorage.setItem('tasks', JSON.stringify(newArray))
-      return {
-        tasks: newArray,
+    this.setState(
+      ({ tasks }) => {
+        const newArray = [...tasks, newItem]
+        localStorage.setItem('tasks', JSON.stringify(newArray)) // Сохраняем задачи в localStorage
+        return {
+          tasks: newArray,
+        }
+      },
+      () => {
+        // Убедитесь, что состояние сохранено
+        console.log('Tasks saved to localStorage:', this.state.tasks)
       }
-    })
+    )
   }
 
   deleteItem = (id) => {
     this.setState(({ tasks }) => {
       const idx = tasks.findIndex((el) => el.id === id)
       const newArray = tasks.toSpliced(idx, 1)
-      localStorage.setItem('tasks', JSON.stringify(newArray))
+      localStorage.setItem('tasks', JSON.stringify(newArray)) // Сохраняем обновленный массив задач
       return {
         tasks: newArray,
       }
@@ -156,14 +159,10 @@ export default class App extends React.Component {
   }
 
   render() {
-    const { tasks } = this.state
-    const { footerFilter } = this.state
-    const doneCount = tasks.filter((el) => el.done).length
-    const tasksCount = tasks.length - doneCount
-
-    // if (tasks.length < 1) {
-    //   this.addItem('tt')
-    // }
+    const { tasks } = this.state;
+    const { footerFilter } = this.state;
+    const doneCount = tasks.filter((el) => el.done).length;
+    const tasksCount = tasks.length - doneCount;
 
     return (
       <section className="todoapp">
@@ -189,6 +188,6 @@ export default class App extends React.Component {
           />
         </section>
       </section>
-    )
+    );
   }
 }

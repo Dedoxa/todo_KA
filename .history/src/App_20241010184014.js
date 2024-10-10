@@ -1,29 +1,26 @@
-import React from 'react'
+import React from 'react';
 
-import Footer from './components/Footer/Footer.js'
-import NewTaskForm from './components/NewTaskForm/NewTaskForm.js'
-import TaskList from './components/TaskList/TaskList.js'
+import Footer from './components/Footer/Footer.js';
+import NewTaskForm from './components/NewTaskForm/NewTaskForm.js';
+import TaskList from './components/TaskList/TaskList.js';
 
-import './App.css'
+import './App.css';
 
 export default class App extends React.Component {
-  static defaultProps = {}
-  static propTypes = {}
-
   state = {
     footerFilter: 'All',
     tasks: [],
-  }
-
-  startId = 0
+  };
 
   componentDidMount() {
-    const savedTasks = localStorage.getItem('tasks')
+    const savedTasks = localStorage.getItem('tasks');
     if (savedTasks) {
-      const tasks = JSON.parse(savedTasks)
-      const maxId = tasks.reduce((max, task) => Math.max(max, task.id), -1)
-      this.startId = maxId + 1
-      this.setState({ tasks })
+      const tasks = JSON.parse(savedTasks);
+      const maxId = tasks.reduce((max, task) => Math.max(max, task.id), -1);
+      this.startId = maxId + 1;
+      this.setState({ tasks });
+    } else {
+      this.startId = 0; // Инициализируем startId, если не существует сохраненных задач
     }
   }
 
@@ -37,31 +34,37 @@ export default class App extends React.Component {
       done: false,
       hidden: false,
       id: this.startId++,
-    }
+    };
   }
 
   addItem = (text, minutes, seconds) => {
-    const newItem = this.createItem(text, minutes, seconds)
+    const newItem = this.createItem(text, minutes, seconds);
 
-    this.setState(({ tasks }) => {
-      const newArray = [...tasks, newItem]
-      localStorage.setItem('tasks', JSON.stringify(newArray))
-      return {
-        tasks: newArray,
+    this.setState(
+      ({ tasks }) => {
+        const newArray = [...tasks, newItem];
+        localStorage.setItem('tasks', JSON.stringify(newArray)); // Сохраняем задачи в localStorage
+        return {
+          tasks: newArray,
+        };
+      },
+      () => {
+        // Убедитесь, что состояние сохранено
+        console.log('Tasks saved to localStorage:', this.state.tasks);
       }
-    })
-  }
+    );
+  };
 
   deleteItem = (id) => {
     this.setState(({ tasks }) => {
-      const idx = tasks.findIndex((el) => el.id === id)
-      const newArray = tasks.toSpliced(idx, 1)
-      localStorage.setItem('tasks', JSON.stringify(newArray))
+      const idx = tasks.findIndex((el) => el.id === id);
+      const newArray = tasks.toSpliced(idx, 1);
+      localStorage.setItem('tasks', JSON.stringify(newArray)); // Сохраняем обновленный массив задач
       return {
         tasks: newArray,
-      }
-    })
-  }
+      };
+    });
+  };
 
   filterTasks(arr, propName, value) {
     return arr.filter((el) => el[propName] === value)

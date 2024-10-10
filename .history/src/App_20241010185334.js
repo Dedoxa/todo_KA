@@ -15,8 +15,6 @@ export default class App extends React.Component {
     tasks: [],
   }
 
-  startId = 0
-
   componentDidMount() {
     const savedTasks = localStorage.getItem('tasks')
     if (savedTasks) {
