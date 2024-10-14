@@ -14,8 +14,8 @@ const App = () => {
 
   useEffect(() => {
     const savedTasks = JSON.parse(localStorage.getItem('tasks'))
-    if (savedTasks.length > 0) {
-      const tasks = savedTasks.map((task) => ({ ...task, edit: false }))
+    if (savedTasks && savedTasks.length > 0) {
+      const tasks = JSON.parse(savedTasks).map((task) => ({ ...task, edit: false }))
       const maxId = tasks.reduce((max, task) => Math.max(max, task.id), -1)
       startId = maxId + 1
       setTasks(tasks)
