@@ -10,7 +10,9 @@ const App = () => {
   const [footerFilter, setFooterFilter] = useState('All')
   const [tasks, setTasks] = useState([])
 
-  let startId = tasks.length > 0 ? tasks.reduce((max, task) => Math.max(max, task.id), -1) : 0
+  let startId = tasks.length > 0
+  ? tasksreduce((max, task) => Math.max(max, task.id), -1)
+  : 0
 
   useEffect(() => {
     const savedTasks = localStorage.getItem('tasks')
