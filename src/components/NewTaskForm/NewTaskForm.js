@@ -1,89 +1,55 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { useState } from 'react'
 
 import './NewTaskForm.css'
 
-export default class NewTaskForm extends React.Component {
-  static defaultProps = {
-    onItemAdded: () => {
-      alert('NewTaskForm.defaultFunction')
-    },
-    onInputChange: () => {
-      alert('NewTaskForm.defaultFunction')
-    },
-  }
+const NewTaskForm = ({ onItemAdded }) => {
+  const [descriptionText, onInputChange] = useState('')
+  const [minutes, onMinutesChange] = useState('')
+  const [seconds, onSecondsChange] = useState('')
 
-  static propTypes = {
-    onItemAdded: PropTypes.func,
-    onInputChange: PropTypes.func,
-  }
-
-  state = {
-    descriptionText: '',
-    minutes: '',
-    seconds: '',
-  }
-
-  onInputChange = (e) => {
-    this.setState({
-      descriptionText: e.target.value,
-    })
-  }
-
-  onKeyDown = (e) => {
+  const onKeyDown = (e) => {
     if (e.key === 'Enter') {
       e.preventDefault()
-      this.onSubmit(e)
+      onSubmit(e)
     }
   }
 
-  onSubmit = (e) => {
+  const onSubmit = (e) => {
     e.preventDefault()
-    const { descriptionText, minutes, seconds } = this.state
     if (descriptionText.trim() !== '') {
-      this.props.onItemAdded(descriptionText, minutes, seconds)
-      this.setState({
-        descriptionText: '',
-        minutes: '',
-        seconds: '',
-      })
+      onItemAdded(descriptionText, minutes, seconds)
+      onInputChange('')
+      onMinutesChange('')
+      onSecondsChange('')
     }
   }
 
-  onMinutesChange = (e) => {
-    this.setState({ minutes: e.target.value })
-  }
-
-  onSecondsChange = (e) => {
-    this.setState({ seconds: e.target.value })
-  }
-
-  render() {
-    return (
-      <form className="new-todo-form" onKeyDown={this.onKeyDown}>
-        <input
-          type="text"
-          className="new-todo"
-          autoFocus
-          onChange={this.onInputChange}
-          placeholder="What needs to be done?"
-          value={this.state.descriptionText}
-        />
-        <input
-          type="number"
-          className="new-todo-form__timer"
-          placeholder="Min"
-          value={this.state.minutes}
-          onChange={this.onMinutesChange}
-        />
-        <input
-          type="number"
-          className="new-todo-form__timer"
-          placeholder="Sec"
-          value={this.state.seconds}
-          onChange={this.onSecondsChange}
-        />
-      </form>
-    )
-  }
+  return (
+    <form className="new-todo-form" onKeyDown={onKeyDown}>
+      <input
+        type="text"
+        className="new-todo"
+        autoFocus
+        onChange={(e) => onInputChange(e.target.value)}
+        placeholder="What needs to be done?"
+        value={descriptionText}
+      />
+      <input
+        type="number"
+        className="new-todo-form__timer"
+        placeholder="Min"
+        value={minutes}
+        onChange={(e) => onMinutesChange(e.target.value)}
+      />
+      <input
+        type="number"
+        className="new-todo-form__timer"
+        placeholder="Sec"
+        value={seconds}
+        onChange={(e) => onSecondsChange(e.target.value)}
+      />
+    </form>
+  )
 }
+
+export default NewTaskForm
